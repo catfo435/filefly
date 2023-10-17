@@ -18,3 +18,6 @@ Tasks to Implement:
 - [ ] Fuzzy Search
 - [ ] 2FA Authentication (SMS OTP Service)
 
+
+- [ ] Responsive Design
+
