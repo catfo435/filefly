@@ -1,9 +1,13 @@
-import LoginPane from "./components/loginPane"
+import LoginPane from "./components/LoginPane"
+import TitleBar from "./components/TitleBar"
 
 export default function Page() {
-  return (
-    <div className="relative h-screen w-screen flex justify-center items-center">
-         <LoginPane />
+  return ( 
+    <div>
+      <TitleBar />
+      <div className="static h-screen w-screen flex justify-center items-center">
+      <LoginPane />
+    </div>
     </div>
   )
 }

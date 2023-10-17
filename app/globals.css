@@ -24,3 +24,11 @@ input {
   display: block;
   margin: 10px 10px 0px 0px ;
 }
+
+.titleBarText {
+  font-size: 3rem;
+  line-height: 1;
+  margin-left: 15px;
+  margin-right: 15px;
+  color: rgb(var(--background-rgb));
+}
