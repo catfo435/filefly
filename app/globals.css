@@ -14,5 +14,9 @@
   .titleBarText {
     @apply text-5xl mx-2.5 md:text-5xl md:mx-3.5
   }
+
+  .loginPaneFooter span{
+    @apply block hover:underline hover:cursor-pointer
+  }
 }
 
