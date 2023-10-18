@@ -18,7 +18,7 @@ export default function TitleBar(){
                 <span className="titleBarText">L</span>
                 <span className="titleBarText">Y</span>
             </div>
-            <button className="absolute right-5 h-10 w-10 rounded-lg hover:outline-double bg-slate-700 dark:bg-slate-300" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}></button>
+            <button className="absolute right-5 h-8 w-8 rounded-lg hover:outline-double bg-slate-700 dark:bg-slate-300" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}></button>
         </div>
     )
 }

@@ -8,7 +8,7 @@ export default function Page() {
 
   return ( 
     <div className="flex-auto h-full w-full flex flex-col">
-      <div className="text-5xl mt-7 w-full h-fit flex justify-center">
+      <div className="text-4xl md:text-5xl mt-7 w-full h-fit flex justify-center">
         <span>Welcome, {searchParams.get("name")}!</span>
       </div>
       <FilesButton />
