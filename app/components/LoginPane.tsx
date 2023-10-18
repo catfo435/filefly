@@ -1,6 +1,6 @@
 export default function LoginPane(){
     return (
-        <div className="loginInPane shadow-black bg-slate-300 dark:bg-slate-700 w-1/4 h-2/3 rounded-2xl">
+        <div className="loginInPane shadow-black bg-slate-300 dark:bg-slate-700 w-2/3 min-[720px]:w-[480px] h-[614px] mt-20 rounded-2xl">
           <span className="my-16 flex justify-center items-center text-4xl font-bold">User Login</span>
           <div className="flex justify-center items-center">
           <form>

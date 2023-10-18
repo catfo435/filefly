@@ -6,7 +6,7 @@ export default function TitleBar(){
     const { theme, setTheme } = useTheme();
 
     return (
-        <div className="fixed h-20 w-screen bg-slate-400 dark:bg-slate-700 flex justify-center items-center">
+        <div className="h-20 w-screen bg-slate-400 dark:bg-slate-700 flex justify-center items-center">
             <span className="titleBarText">F</span>
             <span className="titleBarText">I</span>
             <span className="titleBarText">L</span>

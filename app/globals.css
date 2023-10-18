@@ -2,16 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@layer components {
+@layer base{
   input {
     @apply block my-4 bg-slate-350 dark:bg-slate-500
   }
 }
 
-.titleBarText {
-  font-size: 3rem;
-  line-height: 1;
-  margin-left: 15px;
-  margin-right: 15px;
+
+@layer components {
+
+  .titleBarText {
+    @apply text-5xl mx-2.5 md:text-5xl md:mx-3.5
+  }
 }
+
