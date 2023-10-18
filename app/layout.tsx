@@ -18,12 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body className='bg-slate-200 dark:bg-slate-900 text-slate-700 dark:text-slate-300'>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main>
-            <div className="flex-col flex-auto h-screen w-screen">
-              <TitleBar />
-              {children}
+            <div className="flex flex-col h-full">
+            <TitleBar />
+            {children}
             </div>
-          </main>
         </ThemeProvider>
       </body>
     </html>

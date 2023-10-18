@@ -9,7 +9,7 @@ export default function Page() {
   const [newUserLogin,setNewUserLogin] = useState(false)
 
   return ( 
-    <div className="fixed h-full w-full flex justify-center">
+    <div className="flex-auto flex justify-center">
       {newUserLogin?<SignUpPane />:<LoginPane setNewUserLogin={setNewUserLogin}/>}
     </div>
   )

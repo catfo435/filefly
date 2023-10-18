@@ -1,9 +1,9 @@
 "use client"
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function SignUpPane(){
 
-    async function handleSubmit(e:any){
+    async function handleSubmit(e:FormEvent<HTMLFormElement>){
       e.preventDefault(); 
       if (passRepeat && pass !== passRepeat){
         alert("Passwords dont match");
@@ -16,7 +16,7 @@ export default function SignUpPane(){
     const [passRepeat,setPassRepeat] = useState("")
 
     return (
-        <div className="signUpPane relative shadow-black bg-slate-300 dark:bg-slate-700 w-2/3 min-[720px]:w-[480px] h-[614px] mt-20 rounded-2xl">
+        <div className="signUpPane relative bg-slate-300 dark:bg-slate-700 w-2/3 min-[720px]:w-[480px] h-[614px] mt-20 rounded-2xl">
           <div>
           <span className="my-14 flex justify-center text-4xl font-bold">Sign Up</span>
           </div>
