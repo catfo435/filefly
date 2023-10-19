@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         'slate-350': '#afbccc',
+        'slate-650': '#3d4b5f',
       },
     },
   },
