@@ -4,26 +4,31 @@ import SentFilePane from './SentFilePane'
 // Will be removed when backend is implemented
 const dummyFileArray = [
   {
+    id:1,
     sentTo:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
   },
   {
+    id:2,
     sentTo:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
   },
   {
+    id:3,
     sentTo:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
   },
   {
+    id:4,
     sentTo:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
   },
   {
+    id:5,
     sentTo:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
@@ -39,7 +44,7 @@ export default function SentFilesPane() {
         <div className='flex flex-col content py-4 px-4 w-full h-full items-center'>
           <div className='w-fit h-fit'>Files Sent</div>
           <div className='flex flex-col w-full h-[580px] items-center overflow-scroll bg-slate-300 dark:bg-slate-800 mt-5 mb-10 rounded-3xl'>
-            {dummyFileArray.map((fileProps) => {return <SentFilePane {...fileProps} /> })}
+            {dummyFileArray.map((fileProps) => {return <SentFilePane key={fileProps.id} {...fileProps} /> })}
           </div>
         </div>
         </div>
