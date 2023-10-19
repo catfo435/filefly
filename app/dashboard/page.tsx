@@ -12,7 +12,7 @@ export default function Page() {
       router.replace("/")
       return
     }
-    userName = localStorage.getItem("user")?
+    userName = localStorage.getItem("user")!
   }
   catch (e){
   }
