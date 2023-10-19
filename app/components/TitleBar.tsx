@@ -9,7 +9,7 @@ export default function TitleBar(){
 
     return (
         <div className="flex-initial h-20 w-screen bg-slate-400 dark:bg-slate-700 flex justify-center items-center">
-            <div className="hover:cursor-pointer" onClick={() => {router.replace("/dashboard?name=John Doe")}}>
+            <div className="hover:cursor-pointer" onClick={() => {router.replace("/dashboard")}}>
                 <span className="titleBarText">F</span>
                 <span className="titleBarText">I</span>
                 <span className="titleBarText">L</span>
