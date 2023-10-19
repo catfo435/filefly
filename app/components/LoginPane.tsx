@@ -11,7 +11,7 @@ export default function LoginPane(props: LoginPaneProps){
 
   function handleLogin(e:FormEvent<HTMLFormElement>){
     e.preventDefault()
-    localStorage.setItem("user","John Doe")
+    localStorage.setItem("user","John Doe");
     router.push("/dashboard")        
   }
 
