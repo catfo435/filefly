@@ -14,7 +14,7 @@ export default function SendFilePane() {
                 <span className='my-5'>the</span>
                 <span className='my-10'>Files</span>
               </div>
-              <div className='flex w-1/2 bg-slate-350 dark:bg-slate-700 my-5 mr-6 rounded-lg justify-center items-center'>
+              <div className='flex w-1/2 bg-slate-350 dark:bg-slate-700 hover:opacity-90 hover:dark:bg-slate-650 my-5 mr-6 rounded-lg justify-center items-center'>
                 <label className='w-full h-full flex flex-col justify-center items-center hover:cursor-pointer'>
                   Browse files
                 <input className='hidden' type='file'></input>
