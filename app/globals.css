@@ -18,6 +18,10 @@
   .loginPaneFooter span{
     @apply block hover:underline hover:cursor-pointer
   }
+
+  .userMenu.active {
+    @apply w-screen md:w-[500px]
+  }
 }
 
 html,body {
