@@ -1,14 +1,14 @@
 import React from 'react'
 
 // Will be changed when backend is implemented
-type SentFilePaneProps = {
-    sentTo : string,
+type FilePaneProps = {
+    user : string,
     fileName: string,
     time: string,
 }
 
 
-export default function SentFilePane(props: SentFilePaneProps) {
+export default function FilePane(props: FilePaneProps) {
   return (
     <div title={props.time} className='w-[80%] h-[150px] my-5 flex justify-center items-center bg-slate-350 dark:bg-slate-700 hover:opacity-90 hover:dark:bg-slate-650 rounded-lg'>
         <div className='content flex w-[90%] h-[90%] items-center text-3xl divide-x-4 divide-slate-400 dark:divide-slate-600'>
@@ -19,7 +19,7 @@ export default function SentFilePane(props: SentFilePaneProps) {
                 {props.fileName}
             </div>
             <div className='w-1/3 h-full flex items-center justify-center'>
-                {props.sentTo}
+                {props.user}
             </div>
         </div>
     </div>
