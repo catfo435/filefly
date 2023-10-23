@@ -20,7 +20,7 @@
   }
 
   .userMenu.active {
-    @apply w-screen md:w-[500px]
+    @apply w-screen md:w-[300px]
   }
 }
 
