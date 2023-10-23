@@ -22,7 +22,16 @@
   .userMenu.active {
     @apply w-screen md:w-[300px]
   }
+
+  .viewSentFiles.responsive {
+    @apply flex w-full h-full
+  }
+  
+  .sendFiles.responsive {
+    @apply hidden
+  }
 }
+
 
 html,body {
   height: 100%;
