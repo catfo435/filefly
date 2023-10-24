@@ -1,5 +1,5 @@
 import React from 'react'
-import FilePane from './FilePane'
+import FilePane from '../FilePane'
 
 // Will be removed when backend is implemented
 const dummyFileArray = [

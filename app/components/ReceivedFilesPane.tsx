@@ -8,30 +8,35 @@ const dummyFileArray = [
     user:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
+    downloadFilePath:"/dummy.txt"
   },
   {
     id:2,
     user:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
+    downloadFilePath:"/dummy.txt"
   },
   {
     id:3,
     user:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
+    downloadFilePath:"/dummy.txt"
   },
   {
     id:4,
     user:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
+    downloadFilePath:"/dummy.txt"
   },
   {
     id:5,
     user:"catfo",
     fileName:"dummy.txt",
     time:"dummytime",
+    downloadFilePath:"/dummy.txt"
   },
   
 ]

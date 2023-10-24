@@ -10,6 +10,9 @@
   input {
     @apply block my-4 bg-slate-350 dark:bg-slate-500
   }
+  a {
+    @apply flex justify-center items-center w-full h-full
+  }
 }
 
 
