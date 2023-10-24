@@ -1,12 +1,7 @@
 "use client"
 import { FormEvent, useEffect, useState } from "react"
-import { useCookies, Cookies } from "react-cookie";
 
-type PageProps = {
-  cookies: Cookies
-}
-
-export default function Page(props:PageProps) {
+export default function Page() {
 
   const [userName, setUserName] = useState<string>();
   const [userNameReceipient, setuserNameReceipient] = useState<string>();
