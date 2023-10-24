@@ -16,8 +16,8 @@ export default function DashLayout({
 
     useEffect(() => {
       let user;
-      if (typeof window !== "undefined" && window.localStorage){
-        user = localStorage.getItem("user")!
+      if (typeof window !== "undefined" && window.sessionStorage){
+        user = sessionStorage.getItem("user")!
         if (!user) {
           router.replace("/")
           return

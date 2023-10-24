@@ -7,8 +7,7 @@ export default function Page() {
   const [userNameReceipient, setuserNameReceipient] = useState<string>();
 
   useEffect(() => { 
-    setuserNameReceipient(sessionStorage.getItem("set_user")!)   
-    setUserName(localStorage.getItem("user")!)
+    setUserName(sessionStorage.getItem("user")!)
   },[])
 
 

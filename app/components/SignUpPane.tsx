@@ -1,7 +1,18 @@
 "use client"
 import { FormEvent, useState } from "react";
+import { firebaseDB } from "../backend";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function SignUpPane(){
+
+
+
+    function randomPassword() {
+    return(
+      Math.random().toString(36).slice(2) +
+      Math.random().toString(36)
+      .toUpperCase().slice(2));
+    }
 
     async function handleSubmit(e:FormEvent<HTMLFormElement>){
       e.preventDefault(); 
@@ -9,11 +20,35 @@ export default function SignUpPane(){
         alert("Passwords dont match");
         return;
       }
-      alert("Account made!")  
+
+      try {        
+
+      await setDoc(doc(firebaseDB,"users",userName!),{
+        userName : userName,
+        dateCreated : Date()
+      });
+
+      const passKeys = {
+        master : pass,
+        n1 : randomPassword(),
+        n2 : randomPassword(),
+        n3 : randomPassword(),
+        n4 : randomPassword(),
+        n5 : randomPassword(),
+        n6 : randomPassword()
+      }
+      
+      await setDoc(doc(firebaseDB,"passkeys",userName!),passKeys);
+      alert("Account Made!")    
+    }  
+      catch(e){
+        console.error(e);
+      }
     }
 
-    const [pass,setPass] = useState("")
-    const [passRepeat,setPassRepeat] = useState("")
+    const[userName,setUserName] = useState<string>();
+    const [pass,setPass] = useState<string>()
+    const [passRepeat,setPassRepeat] = useState<string>()
 
     return (
         <div className="signUpPane relative bg-slate-300 dark:bg-slate-700 w-2/3 min-[720px]:w-[480px] h-[614px] mt-20 rounded-2xl">
@@ -24,12 +59,12 @@ export default function SignUpPane(){
           <div className="flex justify-center items-center">
           <form onSubmit={handleSubmit}>
             <label htmlFor="login_user">Username</label>
-            <input id="login_user" type="text"/>
+            <input id="login_user" type="text" value={userName} onChange={(e) => {setUserName(e.target.value)}} required/>
             <br></br>
 
             <div>
               <label htmlFor="login_pass">Password</label>
-              <input id="login_pass" type="password" value={pass} onChange={(e) => {setPass(e.target.value)}}/>
+              <input id="login_pass" type="password" value={pass} onChange={(e) => {setPass(e.target.value)}} required/>
             </div>
 
             <br></br>

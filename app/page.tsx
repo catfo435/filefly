@@ -11,7 +11,7 @@ export default function Page() {
   const router = useRouter()
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
+    if (sessionStorage.getItem("user")) {
       router.replace("/dashboard")
     }
   },[])
