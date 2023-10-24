@@ -12,7 +12,7 @@ export default function DashLayout({
     const [auth, setAuth] = useState(false)
     const router = useRouter()
 
-    const selectedUser = sessionStorage.getItem("set_user")
+
 
     useEffect(() => {
       let user;
@@ -22,12 +22,16 @@ export default function DashLayout({
           router.replace("/")
           return
         }
+        const selectedUser = sessionStorage.getItem("set_user")
+
+        if (!selectedUser){
+          const path = window.location.href
+          if (path.match("\/(?:.(?!\/))+$")![0] != "/dashboard")
+          window.location.href = "/dashboard"
+        }
+        
       }
-      if (!selectedUser){
-        const path = window.location.href
-        if (path.match("\/(?:.(?!\/))+$")![0] != "/dashboard")
-        window.location.href = "/dashboard"
-      }
+
       setAuth(true);
       (document.getElementsByClassName("dashMenu")[0] as HTMLElement).hidden = false 
     },[])
