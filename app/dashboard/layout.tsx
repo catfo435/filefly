@@ -28,8 +28,10 @@ export default function RootLayout({
 
     return auth && (
       <div className="flex w-full h-full">
-        <UserMenu />  
-        {children}
+        <UserMenu />
+        <div className="dashboardContent flex w-full h-full">
+          {children}
+        </div>  
       </div>
     )
   }

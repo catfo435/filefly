@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --navBarWidth : 300px;
+}
+
 @layer base{
   input {
     @apply block my-4 bg-slate-350 dark:bg-slate-500
@@ -20,7 +24,11 @@
   }
 
   .userMenu.active {
-    @apply w-screen md:w-[300px]
+    @apply w-screen md:w-[var(--navBarWidth)]
+  }
+
+  .clickDisableOverlay.active {
+    @apply md:visible md:w-[calc(100vw-var(--navBarWidth))] md:left-[var(--navBarWidth)]
   }
 
   .viewSentFiles.responsive {
