@@ -22,13 +22,6 @@ export default function DashLayout({
           router.replace("/")
           return
         }
-        const selectedUser = sessionStorage.getItem("set_user")
-
-        if (!selectedUser){
-          const path = window.location.href
-          if (path.match("\/(?:.(?!\/))+$")![0] != "/dashboard")
-          window.location.href = "/dashboard"
-        }
         
       }
 
