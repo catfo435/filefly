@@ -18,7 +18,7 @@ export default function LoginPage(props: LoginPaneProps){
 
       await supabase
       .from("loginHistory")
-      .insert([{user:"master"}])
+      .insert([{user:"master",master_user:userName}])
 
     }
     else {
@@ -96,6 +96,7 @@ export default function LoginPage(props: LoginPaneProps){
       if (checkPass.data![0].passkeys.master == pass) {
         sessionStorage.setItem("user",userName!);
         sessionStorage.setItem("userIndex","master")
+        sessionStorage.setItem("restrictedPrivy","disabled")
         onSuccessLogin("master")
       }
       else {

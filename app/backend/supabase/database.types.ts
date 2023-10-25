@@ -8,6 +8,13 @@ type Json = {
   normalPasskeys : Array<passKey>
 }
 
+export type LoginEntry = {
+  id: number,
+  loginTime: string | null,
+  master_user: string | null,
+  user: string
+}
+
 export interface Database {
   public: {
     Tables: {
