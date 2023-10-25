@@ -1,10 +1,11 @@
-import ReceivedFilesPane from '@/app/components/ReceivedFilesPane'
+
+import ReceivedFilesPage from '@/app/assets/pages/ReceivedFilesPage'
 import React from 'react'
 
 export default function Page() {
   return (
     <div className='flex-auto flex'>
-        <ReceivedFilesPane />
+        <ReceivedFilesPage />
     </div>
   )
 }

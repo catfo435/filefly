@@ -1,5 +1,5 @@
 "use client"
-import FilesButton from "@/app/components/FIlesButton"
+import FilesButton from "@/app/assets/components/FIlesButton"
 
 export default function Page() {
 

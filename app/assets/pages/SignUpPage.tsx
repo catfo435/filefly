@@ -1,10 +1,8 @@
 "use client"
 import { FormEvent, useState } from "react";
-import { firebaseDB } from "../backend";
-import { doc, setDoc } from "firebase/firestore";
+import { supabase } from "../../backend/supabase";
 
-export default function SignUpPane(){
-
+export default function SignUpPage(){   
 
 
     function randomPassword() {
@@ -21,15 +19,12 @@ export default function SignUpPane(){
         return;
       }
 
-      try {        
+      try {
 
-      await setDoc(doc(firebaseDB,"users",userName!),{
-        userName : userName,
-        dateCreated : Date()
-      });
 
+              
       const passKeys = {
-        master : pass,
+        master : pass!,
         n1 : randomPassword(),
         n2 : randomPassword(),
         n3 : randomPassword(),
@@ -37,8 +32,11 @@ export default function SignUpPane(){
         n5 : randomPassword(),
         n6 : randomPassword()
       }
-      
-      await setDoc(doc(firebaseDB,"passkeys",userName!),passKeys);
+
+      await supabase
+      .from("users")
+      .insert([{userName:userName!,passkeys:passKeys}])
+
       alert("Account Made!")    
     }  
       catch(e){

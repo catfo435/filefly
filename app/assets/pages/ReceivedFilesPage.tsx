@@ -1,5 +1,5 @@
 import React from 'react'
-import FilePane from './FilePane'
+import FilePane from '../components/FilePane'
 
 // Will be removed when backend is implemented
 const dummyFileArray = [
@@ -42,7 +42,7 @@ const dummyFileArray = [
 ]
 
 
-export default function ReceivedFilesPane() {
+export default function ReceivedFilesPage() {
   return (
     <div className='receivedFiles w-full flex justify-center items-center'>
         <div className="bg-[#D6DEE8] dark:bg-[#162032] w-[90%] h-[90%] rounded-3xl flex justify-center text-5xl md:text-7xl">

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 
 
-export default function SendFilePane() {
+export default function SendFilePage() {
 
   const [toUser,setToUser] = useState<string>()
 

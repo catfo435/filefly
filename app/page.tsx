@@ -1,8 +1,8 @@
 "use client"
 import { useEffect, useState } from "react"
-import LoginPane from "./components/LoginPane"
-import SignUpPane from "./components/SignUpPane"
 import { useRouter } from "next/navigation"
+import SignUpPage from "./assets/pages/SignUpPage"
+import LoginPage from "./assets/pages/LoginPage"
 
 export default function Page() {
 
@@ -18,7 +18,7 @@ export default function Page() {
 
   return ( 
     <div className="flex-auto flex justify-center">
-      {newUserLogin?<SignUpPane />:<LoginPane setNewUserLogin={setNewUserLogin}/>}
+      {newUserLogin?<SignUpPage />:<LoginPage setNewUserLogin={setNewUserLogin}/>}
     </div>
   )
 }

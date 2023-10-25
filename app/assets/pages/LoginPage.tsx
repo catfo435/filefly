@@ -3,33 +3,41 @@
 import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 
-import { doc, getDoc} from "firebase/firestore"; 
-import { firebaseDB } from "../backend";
+import { supabase } from "../../backend/supabase";
 
 type LoginPaneProps = {
   setNewUserLogin: Function
 }
 
-export default function LoginPane(props: LoginPaneProps){
+export default function LoginPage(props: LoginPaneProps){
 
   async function handleLogin(e:FormEvent<HTMLFormElement>){
     e.preventDefault()
 
-    const usersRef = doc(firebaseDB,"users",userName!)
-    const passRef = doc(firebaseDB,"passkeys",userName!)
-
-    const usersSnap = await getDoc(usersRef);
+    const checkUser = await supabase
+      .from("users")
+      .select()
+      .eq("userName",userName!)
     
-    if (!usersSnap.exists()){
+    if (!checkUser.data![0]){
       alert("No such username");
       setUserName("")
       setPass("")
       return;
     }
     else {
-      const passSnap = await getDoc(passRef);
-      if (passSnap.data()!.master == pass) {
+      const checkPass = await supabase
+      .from("users")
+      .select()
+      .eq("userName",userName!)
+
+
+      if (checkPass.data![0].passkeys.master == pass) {
         sessionStorage.setItem("user",userName!);
+      }
+      else {
+        alert("Wrong pass");
+        return
       }
     }
     router.push("/dashboard")        
@@ -59,7 +67,7 @@ export default function LoginPane(props: LoginPaneProps){
           </form>
           </div>
           <div className="loginPaneFooter flex flex-col w-fit mx-auto">
-            <span>Having Trouble Signing In?</span>
+            <span>Use Passkeys?</span>
             <span className="w-fit mx-auto" onClick={() => {props.setNewUserLogin(true)}}>New User?</span>
           </div>
         </div> 

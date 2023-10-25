@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
-import UserMenu from "../components/UserMenu"
+import UserMenu from "../assets/components/UserMenu"
 import { usePathname, useRouter } from "next/navigation"
 
 export default function DashLayout({

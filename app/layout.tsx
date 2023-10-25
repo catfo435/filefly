@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { ThemeProvider } from './components/ThemeProvider'
-import TitleBar from './components/TitleBar'
+import { ThemeProvider } from './assets/components/ThemeProvider'
+import TitleBar from './assets/components/TitleBar'
 
 
 export const metadata: Metadata = {
