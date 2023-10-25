@@ -26,7 +26,7 @@ export default function LoginHistoryPane() {
     const [loading, setLoading] = useState(true)
 
   return (
-    <div className='my-5 mx-5 w-full h-full flex flex-col justify-center items-center'>
+    <div className='md:my-5 md:mx-5 w-full h-full flex flex-col justify-center items-center'>
         <span className='md:flex-initial w-fit h-fit'>Login History</span>
         <div className={loading?'loadingAnimation md:h-[500px] animate-pulse':'loadingAnimation md:h-[600px]'}>
           <div className='hidden md:flex md:justify-center'>

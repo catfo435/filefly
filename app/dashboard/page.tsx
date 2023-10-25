@@ -31,7 +31,7 @@ export default function Page() {
       </div>
       <div className="flex-auto flex justify-center items-center">
       <div className="flex flex-col items-center justify-center text-5xl bg-[#D6DEE8] dark:bg-[#162032] h-3/4 rounded-3xl">
-        We are sending files to...
+        Select User   
         <form onSubmit={handleSubmit}>
           <div className="flex justify-center items-center w-full">
           <input className="rounded-3xl h-20 mt-10 px-5 py-5 w-3/4" value={userNameReceipient} onChange={(e) => {setuserNameReceipient(e.target.value)}}></input>

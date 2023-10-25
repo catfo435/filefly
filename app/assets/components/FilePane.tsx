@@ -3,10 +3,10 @@ import React from 'react'
 import { saveAs } from "file-saver";
 
 // Will be changed when backend is implemented
-type FilePaneProps = {
-    user : string,
+export type FilePaneProps = {
+    user? : string,
     fileName: string,
-    time: string,
+    time?: string,
     downloadFilePath?: string
 }
 
@@ -15,8 +15,8 @@ export default function FilePane(props: FilePaneProps) {
 
   function handleClick(){
     if (props.downloadFilePath){
-        saveAs("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-        "example.pdf")
+        saveAs(props.downloadFilePath,
+        props.fileName)
     }
     else return;
   }
