@@ -1,16 +1,37 @@
-export type Json = {
+export type passKey = {
+  passkey:string,
+  caption:string
+}
+
+type Json = {
   master:string,
-  n1:string,
-  n2:string,
-  n3:string,
-  n4:string,
-  n5:string,
-  n6:string,
+  normalPasskeys : Array<passKey>
 }
 
 export interface Database {
   public: {
     Tables: {
+      loginHistory: {
+        Row: {
+          id: number
+          loginTime: string | null
+          master_user: string | null
+          user: string
+        }
+        Insert: {
+          id?: number
+          loginTime?: string | null
+          master_user?: string | null
+          user: string
+        }
+        Update: {
+          id?: number
+          loginTime?: string | null
+          master_user?: string | null
+          user?: string
+        }
+        Relationships: []
+      }
       users: {
         Row: {
           dateCreated: string

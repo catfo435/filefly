@@ -20,17 +20,17 @@ export default function SignUpPage(){
       }
 
       try {
-
-
-              
+        
       const passKeys = {
         master : pass!,
-        n1 : randomPassword(),
-        n2 : randomPassword(),
-        n3 : randomPassword(),
-        n4 : randomPassword(),
-        n5 : randomPassword(),
-        n6 : randomPassword()
+        normalPasskeys:[
+          {passkey:randomPassword(),caption:"normal-user-1"},
+          {passkey:randomPassword(),caption:"normal-user-2"},
+          {passkey:randomPassword(),caption:"normal-user-3"},
+          {passkey:randomPassword(),caption:"normal-user-4"},
+          {passkey:randomPassword(),caption:"normal-user-5"},
+          {passkey:randomPassword(),caption:"normal-user-6"}
+        ]
       }
 
       await supabase
@@ -38,6 +38,7 @@ export default function SignUpPage(){
       .insert([{userName:userName!,passkeys:passKeys}])
 
       alert("Account Made!")    
+      window.location.href = "/"
     }  
       catch(e){
         console.error(e);

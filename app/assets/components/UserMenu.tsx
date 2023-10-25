@@ -28,6 +28,12 @@ export default function UserMenu() {
             <a href='/dashboard/passwordsAndSecurity' onClick={closeUserMenu}>
             <span className='mt-4 w-full hover:cursor-pointer hover:opacity-80'>Passwords and Security</span>
             </a>
+            <a href='/' onClick={() => {
+              closeUserMenu();
+              sessionStorage.clear()
+            }}>
+            <span className='mt-4 w-full hover:cursor-pointer hover:opacity-80'>Logout</span>
+            </a>
           </div>
         </div>
         </div>
