@@ -24,6 +24,7 @@ export default function ReceivedFilesPage() {
         continue;
       }
 
+      
       let fileProps : FilePaneProps = {
         user : metaData.customMetadata!.sentBy,
         fileName : res.items[i].name,
