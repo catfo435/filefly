@@ -37,6 +37,7 @@ export default function ReceivedFilesPage() {
 
       let fileProps : FilePaneProps = {
         user : metaData.customMetadata!.sentBy,
+        caption: metaData.customMetadata!.caption,
         fileName : res.items[i].name,
         downloadFilePath : res.items[i].fullPath
       }
