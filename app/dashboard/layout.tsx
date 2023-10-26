@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
+import { checkUser } from "../backend/jwt"
 
 export default function DashLayout({
     children,
@@ -35,6 +36,7 @@ export default function DashLayout({
         <div className="absolute left-4 top-4 text-2xl hover:cursor-pointer hover:opacity-90 bg-slate-300 dark:bg-slate-500 px-2 py-2 rounded-lg" onClick={
           () => {
             sessionStorage.clear()
+            document.removeEventListener("click",checkUser)
             window.location.href = "/"
           }
         }>Logout</div>

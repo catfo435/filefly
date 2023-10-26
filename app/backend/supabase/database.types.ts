@@ -54,20 +54,26 @@ export interface Database {
       loginHistory: {
         Row: {
           id: number
+          loginSessionToken: string
           loginTime: string | null
           master_user: string | null
+          secret: string
           user: string
         }
         Insert: {
           id?: number
+          loginSessionToken: string
           loginTime?: string | null
           master_user?: string | null
+          secret: string
           user: string
         }
         Update: {
           id?: number
+          loginSessionToken?: string
           loginTime?: string | null
           master_user?: string | null
+          secret?: string
           user?: string
         }
         Relationships: []

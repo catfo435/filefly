@@ -4,6 +4,8 @@ import FileDetailsPane from '../components/FileDetailsPane';
 
 import { ref, updateMetadata, uploadBytes } from "firebase/storage";
 import { fileStorage } from '@/app/backend/fireBase';
+import { supabase } from '@/app/backend/supabase';
+import { checkUser } from '@/app/backend/jwt';
 
 
 export default function SendFilePage() {
@@ -28,6 +30,7 @@ export default function SendFilePage() {
 
 
   async function handleFileUpload(e:ChangeEvent<HTMLInputElement>){
+
     
     if (!e.target.files) setUploadState(false);
     else {

@@ -1,5 +1,6 @@
 "use client"
 import { useEffect } from "react"
+import { checkUser } from "../backend/jwt"
 
 export default function Layout({
     children,
@@ -8,6 +9,14 @@ export default function Layout({
   }) {
 
     useEffect(() => {
+
+      const loggedIn = (sessionStorage.getItem("user") != null)
+
+      if (loggedIn){
+        checkUser()
+        document.addEventListener("click",checkUser)
+      }
+
       const masterUser = (sessionStorage.getItem("restrictedPrivy") == "disabled")
 
       if (!masterUser){
