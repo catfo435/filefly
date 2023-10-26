@@ -33,22 +33,28 @@ export interface Database {
     Tables: {
       fileHistory: {
         Row: {
-          fileDetails: Json
+          fileName: string
           id: number
+          master: string
+          sentBy: string
+          sentTo: string
           transactionTime: string | null
-          transactionType: string
         }
         Insert: {
-          fileDetails: Json
+          fileName: string
           id?: number
+          master: string
+          sentBy: string
+          sentTo: string
           transactionTime?: string | null
-          transactionType: string
         }
         Update: {
-          fileDetails?: Json
+          fileName?: string
           id?: number
+          master?: string
+          sentBy?: string
+          sentTo?: string
           transactionTime?: string | null
-          transactionType?: string
         }
         Relationships: []
       }

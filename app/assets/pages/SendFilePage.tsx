@@ -5,12 +5,9 @@ import FileDetailsPane from '../components/FileDetailsPane';
 import { ref, updateMetadata, uploadBytes } from "firebase/storage";
 import { fileStorage } from '@/app/backend/fireBase';
 import { supabase } from '@/app/backend/supabase';
-import { checkUser } from '@/app/backend/jwt';
 
 
 export default function SendFilePage() {
-
-  const [toUser,setToUser] = useState<string>()
 
   function handleFileSend(){
 
@@ -23,7 +20,13 @@ export default function SendFilePage() {
       }
     }
 
-    uploadBytes(fileUploadRef, fileDetails!, newMetadata).then((snapshot) => {
+    uploadBytes(fileUploadRef, fileDetails!, newMetadata).then(async (snapshot) => {
+
+      await supabase
+      .from("fileHistory")
+      .insert([{sentBy:sessionStorage.getItem("normal-user-name")!,sentTo:sessionStorage.getItem("set_user")!,master:sessionStorage.getItem("user")!,fileName:fileDetails!.name}])
+      
+
     alert("File sent!")
     });
   }
@@ -47,6 +50,7 @@ export default function SendFilePage() {
   const [uploadState,setUploadState] = useState(false)
   const [fileDetails, setFileDetails] = useState<File | null>()
   const [fileCaption, setFileCaption] = useState<string>("")
+  const [toUser, setToUser] = useState<string>()
 
   
   useEffect(() => {

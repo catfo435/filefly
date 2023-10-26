@@ -62,21 +62,21 @@ export default function LoginPage(props: LoginPaneProps){
 
     const passKeysRef = checkPass.data![0].passkeys.normalPasskeys
     let passCheck = false;
-    let normalUserIndex = 7;
+    let normalUser;
 
     for (var i=0;i<passKeysRef.length;i++){
       if (passKeysRef[i].passkey == pass){
         passCheck = true;
-        normalUserIndex = i+1;
+        normalUser = passKeysRef[i]
         break;
       }
     }
 
     if(passCheck){
       sessionStorage.setItem("restrictedPrivy","enabled")
-      sessionStorage.setItem("userIndex",normalUserIndex!.toString())
+      sessionStorage.setItem("normal-user-name",normalUser!.caption)
       sessionStorage.setItem("user",userName!);
-      await onSuccessLogin(passKeysRef[normalUserIndex-1])
+      await onSuccessLogin(normalUser!)
       router.push("/dashboard") 
     }
     else {
@@ -119,7 +119,6 @@ export default function LoginPage(props: LoginPaneProps){
 
       if (checkPass.data![0].passkeys.master == pass) {
         sessionStorage.setItem("user",userName!);
-        sessionStorage.setItem("userIndex","master")
         sessionStorage.setItem("restrictedPrivy","disabled")
         onSuccessLogin("master")
       }

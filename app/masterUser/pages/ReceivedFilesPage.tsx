@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import {ref, listAll, getMetadata } from "firebase/storage";
 import { fileStorage } from '@/app/backend/fireBase';
 import { supabase } from '@/app/backend/supabase';
-import FilePane, {FilePaneProps} from './FilePane';
+import FilePane, {FilePaneProps} from '../masterComponents/FilePane';
 
 
 export default function ReceivedFilesPage() {
