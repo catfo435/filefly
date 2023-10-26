@@ -47,6 +47,8 @@ export default function SendFilePage() {
     console.error(e);
     
   }
+  
+    setLoading(true)
 
 
     const fileUploadRef = ref(fileStorage,`${sessionStorage.getItem("set_user")}/${fileDetails!.name}`)
@@ -67,7 +69,7 @@ export default function SendFilePage() {
       .from("fileHistory")
       .insert([{caption:fileCaption,sentBy:sessionStorage.getItem("normal-user-name")!,sentTo:sessionStorage.getItem("set_user")!,master:sessionStorage.getItem("user")!,fileName:fileDetails!.name}])
       
-
+    setLoading(false)
     alert("File sent!")
     });
   }
@@ -90,12 +92,15 @@ export default function SendFilePage() {
     }    
   }
 
+  //to many states bruh
+
   const [uploadState,setUploadState] = useState(false)
   const [fileDetails, setFileDetails] = useState<File | null>()
   const [fileCaption, setFileCaption] = useState<string>("")
   const [toUser, setToUser] = useState<string>()
 
   const [previewState,setPreviewState] = useState<"img" | "pdf" | null>()
+  const [loading, setLoading] = useState(false)
 
   
   useEffect(() => {
@@ -116,6 +121,7 @@ export default function SendFilePage() {
               <input id='caption' className='input col-span-3 w-full rounded-xl px-3' value={fileCaption} onChange={(e) => {setFileCaption(e.target.value)}}></input>
               </div>
             </div>
+            <div className='flex mb-5'>{loading?"Sending File...":""}</div>
             <div className='flex w-[90%] h-[400px] bg-slate-300 dark:bg-slate-800 mb-5 rounded-3xl'>
              {!uploadState?<div className='w-1/2 h-full flex flex-col items-center my-5 ml-6 text-5xl'>
                 <span className='my-10'>Select</span>
@@ -140,6 +146,7 @@ export default function SendFilePage() {
                 setUploadState(false)
                 setFileDetails(null)
                 setPreviewState(null)
+                setLoading(false)
               }
             }>Clear</div>
             </div> }   
