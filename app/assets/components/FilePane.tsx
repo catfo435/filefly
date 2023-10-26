@@ -1,7 +1,7 @@
 "use client"
 import { fileStorage } from '@/app/backend/fireBase'
 import { saveAs } from 'file-saver'
-import { getBlob, getDownloadURL, ref } from 'firebase/storage'
+import { getBlob, ref, updateMetadata } from 'firebase/storage'
 import React from 'react'
 
 // Will be changed when backend is implemented
@@ -19,6 +19,19 @@ export default function FilePane(props: FilePaneProps) {
   async function handleClick(){
     if (props.downloadFilePath){
         saveAs(await getBlob(ref(fileStorage, props.downloadFilePath)),props.fileName)
+
+        const setDownloadedRef = ref(fileStorage,`${sessionStorage.getItem("user")}/${props.fileName}`)
+
+        const newMetadata = {
+            customMetadata : {
+                downloadedOnce : "true"
+            }
+          }
+
+        updateMetadata(setDownloadedRef, newMetadata)
+        .catch(console.error)
+
+        window.location.href = "dashboard/actionChooser/receiveMenu"
     }
     else return;
   }

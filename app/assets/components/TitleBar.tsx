@@ -6,7 +6,7 @@ export default function TitleBar(){
     const { theme, setTheme } = useTheme();
 
     return (
-        <div className="flex-initial h-20 w-screen bg-slate-400 dark:bg-slate-700 flex justify-center items-center">
+        <div className="flex-initial shrink-0 h-20 w-screen bg-slate-400 dark:bg-slate-700 flex justify-center items-center">
             <div className="hover:cursor-pointer">
                 <a href="/dashboard">
                 <span className="titleBarText">F</span>

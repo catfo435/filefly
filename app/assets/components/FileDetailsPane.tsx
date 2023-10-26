@@ -8,10 +8,6 @@ type FileProps = {
 }
 
 export default function FileDetailsPane(props: FileProps) {
-
-  // function checkPreview(){
-  //   return (props.fileDetails.type == "application/pdf" || props.fileDetails.type.match("^(image\/)"))
-  // }
   
   return (
     <div className='grid grid-cols-2 text-3xl w-full h-full text-center'>

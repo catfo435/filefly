@@ -19,5 +19,5 @@ Tasks to Implement:
 - [ ] 2FA Authentication (SMS OTP Service)
 
 
-- [X] Responsive Design (progress : partial, not all parts of the website)
+- [ ] Responsive Design (progress : partial, not all parts of the website)
 
