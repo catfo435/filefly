@@ -21,10 +21,13 @@ export default function SentFilesPage() {
 
     let fileArray = new Array<SentFilePaneProps>;
     for (var i=0;i<sentFilesRef.data.length;i++){
+        const fileData = sentFilesRef.data[i]
         let tmp = {
-            sentBy : sentFilesRef.data[i].sentBy,
-            sentTo : sentFilesRef.data[i].sentTo,
-            fileName : sentFilesRef.data[i].fileName
+            sentBy : fileData.sentBy,
+            sentTo : fileData.sentTo,
+            fileName : fileData.fileName,
+            caption : fileData.caption,
+            time: fileData.transactionTime!
         }
         fileArray.push(tmp)
     }

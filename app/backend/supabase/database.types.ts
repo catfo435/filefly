@@ -33,6 +33,7 @@ export interface Database {
     Tables: {
       fileHistory: {
         Row: {
+          caption: string | null
           fileName: string
           id: number
           master: string
@@ -41,6 +42,7 @@ export interface Database {
           transactionTime: string | null
         }
         Insert: {
+          caption?: string | null
           fileName: string
           id?: number
           master: string
@@ -49,6 +51,7 @@ export interface Database {
           transactionTime?: string | null
         }
         Update: {
+          caption?: string | null
           fileName?: string
           id?: number
           master?: string

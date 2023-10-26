@@ -6,6 +6,7 @@ import { ref, uploadBytes } from "firebase/storage";
 import { fileStorage } from '@/app/backend/fireBase';
 import { supabase } from '@/app/backend/supabase';
 import { checkUser } from '@/app/backend/jwt';
+import PreviewPane from './PreviewPane';
 
 
 export default function SendFilePage() {
@@ -50,10 +51,13 @@ export default function SendFilePage() {
 
     const fileUploadRef = ref(fileStorage,`${sessionStorage.getItem("set_user")}/${fileDetails!.name}`)
 
+    const timeStamp = new Date()
+
     const newMetadata = {
       customMetadata : {
         sentBy : sessionStorage.getItem("user")!,
-        caption : fileCaption
+        caption : fileCaption,
+        timeStamp : timeStamp.toLocaleString()
       }
     }
 
@@ -61,7 +65,7 @@ export default function SendFilePage() {
 
       await supabase
       .from("fileHistory")
-      .insert([{sentBy:sessionStorage.getItem("normal-user-name")!,sentTo:sessionStorage.getItem("set_user")!,master:sessionStorage.getItem("user")!,fileName:fileDetails!.name}])
+      .insert([{caption:fileCaption,sentBy:sessionStorage.getItem("normal-user-name")!,sentTo:sessionStorage.getItem("set_user")!,master:sessionStorage.getItem("user")!,fileName:fileDetails!.name}])
       
 
     alert("File sent!")
@@ -91,6 +95,8 @@ export default function SendFilePage() {
   const [fileCaption, setFileCaption] = useState<string>("")
   const [toUser, setToUser] = useState<string>()
 
+  const [previewState,setPreviewState] = useState<"img" | "pdf" | null>()
+
   
   useEffect(() => {
     setToUser(sessionStorage.getItem("set_user")!)
@@ -99,6 +105,7 @@ export default function SendFilePage() {
   return (
     <div className='sendFiles w-full flex flex-auto md:flex-none justify-center items-center'>
         <div className="bg-[#D6DEE8] dark:bg-[#162032] w-[90%] h-[90%] rounded-3xl flex justify-center items-center text-4xl">
+          {previewState?<PreviewPane previewType={previewState} fileDetails={fileDetails!} setPreviewState={setPreviewState}/> :         
           <div className='content py-4 px-4 w-full h-full flex flex-col items-center shrink-0'>
             <span className='text-6xl'>Send File To {toUser}</span>
             <div className='flex my-10'>
@@ -114,7 +121,7 @@ export default function SendFilePage() {
                 <span className='my-10'>Select</span>
                 <span className='my-5'>the</span>
                 <span className='my-10'>Files</span>
-              </div>:<div className='w-1/2 h-full flex flex-col items-center my-5 ml-6 text-5xl'><FileDetailsPane fileDetails={fileDetails!} /></div>}
+              </div>:<div className='w-1/2 h-full flex flex-col items-center my-5 ml-6 text-5xl'><FileDetailsPane fileDetails={fileDetails!} setPreviewState={setPreviewState} /></div>}
               <div className='flex w-1/2 bg-slate-350 dark:bg-slate-700 hover:opacity-90 hover:dark:bg-slate-650 my-5 mr-6 rounded-lg justify-center items-center'>
                 <label className='w-full h-full flex flex-col justify-center items-center hover:cursor-pointer'>
                   Browse files
@@ -132,10 +139,11 @@ export default function SendFilePage() {
               () => {
                 setUploadState(false)
                 setFileDetails(null)
+                setPreviewState(null)
               }
             }>Clear</div>
-            </div> }           
-          </div>
+            </div> }   
+          </div>}
         </div>
     </div>
   )

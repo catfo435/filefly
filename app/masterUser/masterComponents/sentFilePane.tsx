@@ -11,7 +11,7 @@ export type SentFilePaneProps = {
     fileName: string,
     time?: string,
     downloadFilePath?: string,
-    caption? : string
+    caption? : string | null
 }
 
 
@@ -38,7 +38,7 @@ export default function SentFilePane(props: SentFilePaneProps) {
                 <div className='w-1/3 h-full flex overflow-x-scroll items-center justify-center'>
                 <div className='flex flex-col'>
                     <span>Sent By: {props.sentBy}</span>
-                    <span>Sent By: {props.sentTo}</span>
+                    <span>Sent To: {props.sentTo}</span>
                 </div>
                 </div>
                 </div>
