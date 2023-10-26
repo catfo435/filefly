@@ -2,14 +2,48 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import FileDetailsPane from '../components/FileDetailsPane';
 
-import { ref, updateMetadata, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import { fileStorage } from '@/app/backend/fireBase';
 import { supabase } from '@/app/backend/supabase';
 
 
 export default function SendFilePage() {
 
-  function handleFileSend(){
+
+
+  async function handleFileSend(){
+
+    const now = new Date()
+    const beforeOneHour = new Date(now.valueOf() - (1000*60*60))
+
+    try{
+      const checkCooldown = await supabase
+    .from("fileHistory")
+    .select()
+    .eq("master",sessionStorage.getItem("user")!)
+    .gt("transactionTime",beforeOneHour.toISOString())
+    
+
+    if (checkCooldown.data!.length >= 5){
+
+      const minDate = new Date(
+        Math.min(
+          ...checkCooldown.data!.map(element => {
+            return new Date(element.transactionTime!).getTime();
+          }),
+        )
+      );      
+
+      alert(`File Cooldown, Try after ${Math.ceil((minDate.valueOf() - beforeOneHour.valueOf())/(1000*60))} minutes`)
+      return;
+    }
+    
+  }
+  catch(e){
+    console.error(e);
+    
+  }
+
 
     const fileUploadRef = ref(fileStorage,`${sessionStorage.getItem("set_user")}/${fileDetails!.name}`)
 
