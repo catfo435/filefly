@@ -1,8 +1,12 @@
 "use client"
-import { FormEvent, useState } from "react";
+import {  FormEvent, useState } from "react";
 import { supabase } from "../../backend/supabase";
 
-export default function SignUpPage(){   
+type SignUpPageProps = {
+  setPassKeys : Function
+}
+
+export default function SignUpPage(props: SignUpPageProps){   
 
 
     function randomPassword() {
@@ -37,8 +41,8 @@ export default function SignUpPage(){
       .from("users")
       .insert([{userName:userName!,passkeys:passKeys}])
 
-      alert("Account Made!")    
-      window.location.href = "/"
+      props.setPassKeys(passKeys)
+      return;
     }  
       catch(e){
         console.error(e);
@@ -71,7 +75,7 @@ export default function SignUpPage(){
             <div>
               <label htmlFor="login_pass_repeat">Repeat Password</label>
               <input id="login_pass_repeat" type="password" value={passRepeat} onChange={(e) => {setPassRepeat(e.target.value)}}/>
-              {(passRepeat && pass !== passRepeat)?<div className="text-xs flex justify-center text-red-500">Passwords dont match</div>:<></>}
+              {(!passRepeat && pass !== passRepeat)?<div className="text-xs flex justify-center text-red-500">Passwords dont match</div>:<></>}
             </div>
 
             <br></br>
@@ -79,6 +83,9 @@ export default function SignUpPage(){
             <div className="flex justify-center items-center">
             <button className="submitButton px-2 py-2 my-5 text-xl rounded-lg hover:outline-double bg-slate-400 dark:bg-slate-500" type="submit">Sign Up</button>
             </div>
+            <div className="loginPaneFooter flex flex-col w-fit mx-auto">
+            <span className="w-fit mx-auto" onClick={() => {sessionStorage.clear();window.location.href = "/"}}>Already A User? Login In</span>
+          </div>  
           </form>
           </div>
 

@@ -1,13 +1,13 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { FormEvent, useState } from "react"
+import { Dispatch, FormEvent, SetStateAction, useState } from "react"
 
 import { supabase } from "../../backend/supabase";
 import { passKey } from "../../backend/supabase/database.types"
 
 type LoginPaneProps = {
-  setNewUserLogin: Function
+  setNewUserLogin: Dispatch<SetStateAction<boolean>>
 }
 
 export default function LoginPage(props: LoginPaneProps){
@@ -105,7 +105,7 @@ export default function LoginPage(props: LoginPaneProps){
         return
       }
     }
-    router.push("/dashboard")        
+    router.push("/masterUser")        
   }
 
     const router = useRouter()

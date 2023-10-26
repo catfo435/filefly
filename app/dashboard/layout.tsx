@@ -1,7 +1,5 @@
 "use client"
 import { useEffect, useState } from "react"
-import UserMenu from "../assets/components/UserMenu"
-import { usePathname, useRouter } from "next/navigation"
 
 export default function DashLayout({
     children,
@@ -10,8 +8,6 @@ export default function DashLayout({
   }) {
 
     const [auth, setAuth] = useState(false)
-    const router = useRouter()
-
 
 
     useEffect(() => {
@@ -19,19 +15,29 @@ export default function DashLayout({
       if (typeof window !== "undefined" && window.sessionStorage){
         user = sessionStorage.getItem("user")!
         if (!user) {
-          router.replace("/")
+          window.location.href = "/"
           return
+        }
+        const masterUser = (sessionStorage.getItem("restrictedPrivy") == "disabled")
+
+        if (masterUser){
+          window.location.href = "/masterUser"
+          return;
         }
         
       }
 
       setAuth(true);
-      (document.getElementsByClassName("dashMenu")[0] as HTMLElement).hidden = false 
     },[])
 
     return auth && (
       <div className="flex w-full h-full">
-        <UserMenu />
+        <div className="absolute left-4 top-4 text-2xl hover:cursor-pointer hover:opacity-90 bg-slate-300 dark:bg-slate-500 px-2 py-2 rounded-lg" onClick={
+          () => {
+            sessionStorage.clear()
+            window.location.href = "/"
+          }
+        }>Logout</div>
         <div className="dashboardContent flex w-full h-full">
           {children}
         </div>  
