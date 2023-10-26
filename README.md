@@ -6,18 +6,18 @@ A File Sharing App for small files(<2MB)
 
 Tasks to Implement:
 
-- [ ] Sign Up/In Portal 
-- [ ] Database Config, Integration
-- [ ] Master Key, Normal PassKey Implementation
+- [X] Sign Up/In Portal 
+- [X] Database Config, Integration
+- [X] Master Key, Normal PassKey Implementation
 - [ ] Master Key Priveleges
-- [ ] Error Handling + File Limit Check
-- [ ] FireBase Config, Integration
-- [ ] File Upload/Download Menu
+- [X] Error Handling + File Limit Check
+- [X] FireBase and Supabase Config, Integration
+- [X] File Upload/Download Menu
 
 
 - [ ] Fuzzy Search
 - [ ] 2FA Authentication (SMS OTP Service)
 
 
-- [ ] Responsive Design
+- [X] Responsive Design (progress : partial, not all parts of the website)
 
