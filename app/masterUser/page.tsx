@@ -22,7 +22,9 @@ export default function Page() {
                 <div className='bg-slate-300 dark:bg-slate-800 hover:dark:bg-slate-700 hover:cursor-pointer rounded-3xl flex justify-center items-center'onClick={
                   () => {window.location.href = "/masterUser/blockedUsers"}
                 }>Block Users</div>
-                <div className='bg-slate-300 dark:bg-slate-800 hover:dark:bg-slate-700 hover:cursor-pointer rounded-3xl flex justify-center items-center'>Change Passkeys</div>
+                <div className='bg-slate-300 dark:bg-slate-800 hover:dark:bg-slate-700 hover:cursor-pointer rounded-3xl flex justify-center items-center' onClick={
+                  () => {window.location.href = "/masterUser/passKeysView"}
+                }>Change Passkeys</div>
                 <div className='bg-slate-300 dark:bg-slate-800 hover:dark:bg-slate-700 hover:cursor-pointer rounded-3xl flex justify-center items-center'>Check File History</div>
             </div>
         </div>
