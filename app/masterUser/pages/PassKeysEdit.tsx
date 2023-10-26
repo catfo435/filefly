@@ -1,10 +1,34 @@
 "use client"
 import { supabase } from '@/app/backend/supabase'
-import { passKeyJson } from '@/app/backend/supabase/database.types'
+import { passKey, passKeyJson } from '@/app/backend/supabase/database.types'
 import React, { useEffect, useState } from 'react'
+import PassKeyPane from '../masterComponents/PassKeyPane'
 
 
 export default function PassKeysEdit() {
+
+
+    async function handlePassKeyEdit(passkey:string,caption:string,id:number){
+
+        const temp = passKeys!
+        temp.normalPasskeys[id-1] = {id:id,passkey:passkey,caption:caption}
+
+        try {
+        await supabase
+        .from("users")
+        .update({passkeys:{master:temp.master,normalPasskeys:temp.normalPasskeys}})
+        .eq("userName",sessionStorage.getItem("user")!)
+        .then(() => {
+            alert("Passkey updated")
+            fetchPassKeys()
+        })
+        }
+        catch(e){
+            alert("Error!")
+            console.error(e);
+            fetchPassKeys()
+        }
+    }
 
 
     async function fetchPassKeys(){
@@ -13,6 +37,7 @@ export default function PassKeysEdit() {
         .select()
         .eq("userName",sessionStorage.getItem("user")!)
         
+        setLoading(false)
         setPassKeys(passKeysRef.data![0].passkeys)
         
     }
@@ -27,36 +52,16 @@ export default function PassKeysEdit() {
   const [passKeys,setPassKeys] = useState<passKeyJson>()
   const [userName, setUsername] = useState<string>()
 
+  const [loading, setLoading] = useState(true)
+
   return (
     <div className='flex flex-col bg-slate-300 px-5 py-5 dark:bg-slate-700 w-2/3 h-[720px] mt-20 rounded-2xl items-center'>
         <span className='text-3xl my-4'>Your PassKeys, {userName}!</span>
         <div className='passGrid grid grid-cols-3 w-full h-[600px] text-2xl gap-2'>
             <div className='bg-slate-350 dark:bg-slate-650 col-span-3 px-5 py-5 flex justify-center items-center text-center'>Master: {passKeys?.master}</div>
-            <div className='bg-slate-350 dark:bg-slate-600 rounded-2xl px-5 py-5 flex flex-col justify-center items-center text-center'>
-                <span className='my-2'>PassKey: {passKeys?.normalPasskeys[0].passkey}</span>
-                <span className='my-2'>Caption: {passKeys?.normalPasskeys[0].caption}</span>
-            </div>
-            <div className='bg-slate-350 dark:bg-slate-600 rounded-2xl px-5 py-5 flex flex-col justify-center items-center text-center'>
-                <span className='my-2'>PassKey: {passKeys?.normalPasskeys[1].passkey}</span>
-                <span className='my-2'>Caption: {passKeys?.normalPasskeys[1].caption}</span>
-            </div>
-            <div className='bg-slate-350 dark:bg-slate-600 rounded-2xl px-5 py-5 flex flex-col justify-center items-center text-center'>
-                <span className='my-2'>PassKey: {passKeys?.normalPasskeys[2].passkey}</span>
-                <span className='my-2'>Caption: {passKeys?.normalPasskeys[2].caption}</span>
-            </div>
-            <div className='bg-slate-350 dark:bg-slate-600 rounded-2xl px-5 py-5 flex flex-col justify-center items-center text-center'>
-                <span className='my-2'>PassKey: {passKeys?.normalPasskeys[3].passkey}</span>
-                <span className='my-2'>Caption: {passKeys?.normalPasskeys[3].caption}</span>
-            </div>
-            <div className='bg-slate-350 dark:bg-slate-600 rounded-2xl px-5 py-5 flex flex-col justify-center items-center text-center'>
-                <span className='my-2'>PassKey: {passKeys?.normalPasskeys[4].passkey}</span>
-                <span className='my-2'>Caption: {passKeys?.normalPasskeys[4].caption}</span>
-            </div>
-            <div className='bg-slate-350 dark:bg-slate-600 rounded-2xl px-5 py-5 flex flex-col justify-center items-center text-center'>
-                <span className='my-2'>PassKey: {passKeys?.normalPasskeys[5].passkey}</span>
-                <span className='my-2'>Caption: {passKeys?.normalPasskeys[5].caption}</span>
-            </div>
-            
+            {loading?<div className='bg-slate-350 dark:bg-slate-650 col-span-3 row-span-2 px-5 py-5 flex justify-center items-center text-center'>Loading...</div>:
+            passKeys!.normalPasskeys.map((passkey, key) => {return <PassKeyPane passkey={passkey} key={key} handlePassKeyEdit={handlePassKeyEdit} />})
+            }
         </div>
     </div>
   )

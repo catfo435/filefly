@@ -1,4 +1,5 @@
 export type passKey = {
+  id:number,
   passkey:string,
   caption:string
 }

@@ -28,12 +28,12 @@ export default function SignUpPage(props: SignUpPageProps){
       const passKeys = {
         master : pass!,
         normalPasskeys:[
-          {passkey:randomPassword(),caption:"normal-user-1"},
-          {passkey:randomPassword(),caption:"normal-user-2"},
-          {passkey:randomPassword(),caption:"normal-user-3"},
-          {passkey:randomPassword(),caption:"normal-user-4"},
-          {passkey:randomPassword(),caption:"normal-user-5"},
-          {passkey:randomPassword(),caption:"normal-user-6"}
+          {id:1,passkey:randomPassword(),caption:"normal-user-1"},
+          {id:2,passkey:randomPassword(),caption:"normal-user-2"},
+          {id:3,passkey:randomPassword(),caption:"normal-user-3"},
+          {id:4,passkey:randomPassword(),caption:"normal-user-4"},
+          {id:5,passkey:randomPassword(),caption:"normal-user-5"},
+          {id:6,passkey:randomPassword(),caption:"normal-user-6"}
         ]
       }
 
