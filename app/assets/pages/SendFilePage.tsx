@@ -5,6 +5,7 @@ import FileDetailsPane from '../components/FileDetailsPane';
 import { ref, uploadBytes } from "firebase/storage";
 import { fileStorage } from '@/app/backend/fireBase';
 import { supabase } from '@/app/backend/supabase';
+import { checkUser } from '@/app/backend/jwt';
 
 
 export default function SendFilePage() {
@@ -12,6 +13,8 @@ export default function SendFilePage() {
 
 
   async function handleFileSend(){
+
+    checkUser()
 
     const now = new Date()
     const beforeOneHour = new Date(now.valueOf() - (1000*60*60))
@@ -67,6 +70,8 @@ export default function SendFilePage() {
 
 
   async function handleFileUpload(e:ChangeEvent<HTMLInputElement>){
+
+    checkUser()
 
     
     if (!e.target.files) setUploadState(false);
