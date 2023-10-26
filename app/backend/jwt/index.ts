@@ -1,4 +1,3 @@
-import jwt_decode from "jwt-decode"
 import { supabase } from "../supabase"
 
 export async function checkUser(){
@@ -7,15 +6,14 @@ export async function checkUser(){
     .from("loginHistory")
     .select()
     .eq("secret",sessionStorage.getItem("sessionSecret")!)
+    .eq("master_user",sessionStorage.getItem("user")!)
+
 
     if (sessionCheck.data![0] == null){
-      return;
-    }
-
-    if (sessionCheck.data != null && !((jwt_decode(sessionCheck.data[0].loginSessionToken) as any).userName == sessionStorage.getItem("user")!)){
       alert("Invalid Authentication!")
       sessionStorage.clear()
       document.removeEventListener("click",checkUser)
       window.location.href = "/"
+      return;
     }
 }

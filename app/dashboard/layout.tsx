@@ -12,6 +12,14 @@ export default function DashLayout({
 
 
     useEffect(() => {
+
+      const loggedIn = (sessionStorage.getItem("user") != null)
+
+      if (loggedIn){
+        checkUser()
+        document.addEventListener("click",checkUser)
+      }
+
       let user;
       if (typeof window !== "undefined" && window.sessionStorage){
         user = sessionStorage.getItem("user")!

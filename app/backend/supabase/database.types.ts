@@ -61,7 +61,6 @@ export interface Database {
       loginHistory: {
         Row: {
           id: number
-          loginSessionToken: string
           loginTime: string | null
           master_user: string | null
           secret: string
@@ -69,7 +68,6 @@ export interface Database {
         }
         Insert: {
           id?: number
-          loginSessionToken: string
           loginTime?: string | null
           master_user?: string | null
           secret: string
@@ -77,7 +75,6 @@ export interface Database {
         }
         Update: {
           id?: number
-          loginSessionToken?: string
           loginTime?: string | null
           master_user?: string | null
           secret?: string

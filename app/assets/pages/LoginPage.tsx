@@ -6,8 +6,6 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react"
 import { supabase } from "../../backend/supabase";
 import { passKey } from "../../backend/supabase/database.types"
 
-import sign from 'jwt-encode'
-
 type LoginPaneProps = {
   setNewUserLogin: Dispatch<SetStateAction<boolean>>
 }
@@ -15,40 +13,27 @@ type LoginPaneProps = {
 export default function LoginPage(props: LoginPaneProps){
 
 
-  function getSessionToken(){
-
-    function randomToken() {
-      return(
-        Math.random().toString(36).slice(2) +
-        Math.random().toString(36)
-        .toUpperCase().slice(2));
-      }
-
-    const secret = randomToken()
-
-    const token = {
-      userName:userName,
-      time:Date.now()
+  function randomToken() {
+    return(
+      Math.random().toString(36).slice(2) +
+      Math.random().toString(36)
+      .toUpperCase().slice(2));
     }
 
-    return [sign(token,secret),secret]
-  }
-
-
   async function onSuccessLogin(userType: "master" | passKey ){
-    const sessionToken = getSessionToken()
-    sessionStorage.setItem("sessionSecret",sessionToken[1])
+    const sessionToken = randomToken()
+    sessionStorage.setItem("sessionSecret",sessionToken)
     if (userType == "master"){
 
       await supabase
       .from("loginHistory")
-      .insert([{user:"master",master_user:userName, loginSessionToken:sessionToken[0], secret:sessionToken[1]}])
+      .insert([{user:"master",master_user:userName, secret:sessionToken}])
 
     }
     else {
       await supabase
       .from("loginHistory")
-      .insert([{user:userType.caption,master_user:userName, loginSessionToken:sessionToken[0], secret:sessionToken[1]}])
+      .insert([{user:userType.caption,master_user:userName, secret:sessionToken}])
     }
   }
 
