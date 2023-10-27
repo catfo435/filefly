@@ -1,6 +1,7 @@
 "use client"
 import { useEffect } from "react"
 import { checkUser } from "../backend/checkSession"
+import { supabase } from "../backend/supabase"
 
 export default function Layout({
     children,
@@ -27,7 +28,8 @@ export default function Layout({
     return (
       <div className="flex w-full h-full">
         <div className="absolute left-4 top-4 text-2xl hover:cursor-pointer hover:opacity-90 bg-slate-300 dark:bg-slate-500 px-2 py-2 rounded-lg" onClick={
-          () => {
+          async () => {
+            await supabase.auth.signOut()
             sessionStorage.clear()
             window.location.href = "/"
           }

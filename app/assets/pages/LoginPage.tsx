@@ -103,14 +103,54 @@ export default function LoginPage(props: LoginPaneProps){
 
 
       if (checkPass.data![0].passkeys.master == pass) {
-        sessionStorage.setItem("user",userName!);
-        sessionStorage.setItem("restrictedPrivy","disabled")
-        onSuccessLogin("master")
+        
       }
       else {
         alert("Wrong pass");
         setLoading(false);
         return
+      }
+
+      if (!OTPState){
+        const signInRes = await supabase.auth.signInWithOtp({
+          phone: `+91${phoneNumber}`
+        })
+  
+        if (signInRes.error){
+          if (signInRes.error.message == "Invalid login credentials"){
+            alert("Invalid Credentials")
+            setLoading(false)
+            return;
+          }
+          alert("Error Occured!")
+          setLoading(false)
+          return;
+        }
+        setLoading(false)
+        setOTPState(true)
+        return
+      }
+      else {
+        const verifyOTP = await supabase.auth.verifyOtp({
+          phone: `+91${phoneNumber}`,
+          token: OTPval,
+          type:"sms"
+        })
+        
+        if (verifyOTP.error) {
+          if (verifyOTP.error.message == "Token has expired or is invalid"){
+            alert("Token Expired or Invalid!")
+            setOTPState(false)
+            setOTPval("")
+            return;
+          }
+          console.error(verifyOTP.error);
+        }
+        else {
+          sessionStorage.setItem("user",userName!);
+          sessionStorage.setItem("restrictedPrivy","disabled")
+          onSuccessLogin("master")
+        }
       }
     }
     router.push("/masterUser")        
@@ -122,6 +162,10 @@ export default function LoginPage(props: LoginPaneProps){
     const[usePassKeys,setUsePassKeys] = useState(true);
     const [pass,setPass] = useState<string>()
     const [loading,setLoading] = useState(false)
+    const [phoneNumber,setphoneNumber] = useState<string>()
+
+    const [OTPState,setOTPState] = useState(false)
+    const [OTPval, setOTPval] = useState("")
 
     return (
         <div className="loginInPane bg-slate-300 dark:bg-slate-700 w-2/3 min-[720px]:w-[480px] h-[614px] mt-20 rounded-2xl">
@@ -135,12 +179,20 @@ export default function LoginPage(props: LoginPaneProps){
             <label htmlFor="login_pass">{usePassKeys?"PassKey":"Password"}</label>
             <input id="login_pass" type="password" value={pass} onChange={(e) => {setPass(e.target.value)}} required/>
 
-            <br></br>
+            {OTPState?<div>
+              <label htmlFor="otpVerify">Enter OTP</label>
+              <input id="otpVerify" type="text" value={OTPval} onChange={(e) => {setOTPval(e.target.value)}} required></input>
+            </div>:
+            <div hidden={usePassKeys}>
+              <label htmlFor="phoneNumber">Phone Number</label>
+              <input id="phoneNumber" type="text" value={phoneNumber} onChange={(e) => {if (e.target.value.length <= 10) {setphoneNumber(e.target.value)}}} required></input>
+            </div>
+            }
 
-            <span className="flex justify-center">{loading?"Logging In....":""}</span>
+            <span className="flex justify-center">{loading?(OTPState?"Logging In....":"Sending OTP..."):""}</span>
 
             <div className="flex justify-center items-center">
-            <button className="px-2 py-2 my-5 text-xl rounded-lg hover:outline-double bg-slate-400 dark:bg-slate-500" type="submit">Login</button>
+            <button className="px-2 py-2 my-5 text-xl rounded-lg hover:outline-double bg-slate-400 dark:bg-slate-500" type="submit">{OTPState?"Log In":"Get OTP"}</button>
             </div>
           </form>
           </div>
