@@ -16,7 +16,7 @@ Tasks to Implement:
 
 
 - [X] Fuzzy Search
-- [ ] 2FA Authentication (SMS OTP Service)
+- [X] 2FA Authentication (SMS OTP Service) (*Implemented, Twillio doesnt allow OTPs to be sent to un verified numbers for trail accounts, so only I get OTPs*)
 
 
 - [ ] Responsive Design (progress : partial, not all parts of the website)
