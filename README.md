@@ -9,13 +9,13 @@ Tasks to Implement:
 - [X] Sign Up/In Portal 
 - [X] Database Config, Integration
 - [X] Master Key, Normal PassKey Implementation
-- [ ] Master Key Priveleges
+- [X] Master Key Priveleges
 - [X] File Limit Check
 - [X] FireBase and Supabase Config, Integration
 - [X] File Upload/Download Menu
 
 
-- [ ] Fuzzy Search
+- [X] Fuzzy Search
 - [ ] 2FA Authentication (SMS OTP Service)
 
 
