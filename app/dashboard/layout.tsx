@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
-import { checkUser } from "../backend/jwt"
+import { checkUser } from "../backend/checkSession"
 
 export default function DashLayout({
     children,

@@ -21,12 +21,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export type LoginEntry = {
-  id: number,
-  loginTime: string | null,
-  master_user: string | null,
-  user: string
-}
+export type LoginEntry = Database['public']['Tables']['loginHistory']['Row']
 
 export interface Database {
   public: {
@@ -67,6 +62,7 @@ export interface Database {
       loginHistory: {
         Row: {
           id: number
+          loginDeviceDetails: string
           loginTime: string | null
           master_user: string | null
           secret: string
@@ -74,6 +70,7 @@ export interface Database {
         }
         Insert: {
           id?: number
+          loginDeviceDetails: string
           loginTime?: string | null
           master_user?: string | null
           secret: string
@@ -81,6 +78,7 @@ export interface Database {
         }
         Update: {
           id?: number
+          loginDeviceDetails: string
           loginTime?: string | null
           master_user?: string | null
           secret?: string

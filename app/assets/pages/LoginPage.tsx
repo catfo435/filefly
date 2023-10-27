@@ -27,13 +27,13 @@ export default function LoginPage(props: LoginPaneProps){
 
       await supabase
       .from("loginHistory")
-      .insert([{user:"master",master_user:userName, secret:sessionToken}])
+      .insert([{user:"master",master_user:userName, secret:sessionToken, loginDeviceDetails:navigator.userAgent}])
 
     }
     else {
       await supabase
       .from("loginHistory")
-      .insert([{user:userType.caption,master_user:userName, secret:sessionToken}])
+      .insert([{user:userType.caption,master_user:userName, secret:sessionToken, loginDeviceDetails:navigator.userAgent}])
     }
   }
 

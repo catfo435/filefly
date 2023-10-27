@@ -5,12 +5,11 @@ import FileDetailsPane from '../components/FileDetailsPane';
 import { ref, uploadBytes } from "firebase/storage";
 import { fileStorage } from '@/app/backend/fireBase';
 import { supabase } from '@/app/backend/supabase';
-import { checkUser } from '@/app/backend/jwt';
 import PreviewPane from './PreviewPane';
+import { checkUser } from '@/app/backend/checkSession';
 
 
 export default function SendFilePage() {
-
 
 
   async function handleFileSend(){
