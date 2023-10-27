@@ -12,7 +12,7 @@ export default function ShowPassKeys(props: PassKeysProps) {
         <span className='text-3xl my-4'>Account Created! Here are your PassKeys:</span>
         <div className='passGrid grid grid-cols-3 w-full h-[600px] text-2xl gap-2'>
             <div className='bg-slate-350 dark:bg-slate-650 col-span-3 px-5 py-5 flex justify-center items-center text-center'>Master: {props.master}</div>
-            {props.normalPasskeys.map((passkey,id) => {return <div className='bg-slate-350 dark:bg-slate-600 rounded-2xl px-5 py-5 flex justify-center items-center text-center'>PassKey: {passkey.passkey}</div>})}
+            {props.normalPasskeys.map((passkey,id) => {return <div key={id} className='bg-slate-350 dark:bg-slate-600 rounded-2xl px-5 py-5 flex justify-center items-center text-center'>PassKey: {passkey.passkey}</div>})}
         </div>
         <div className='text-center text-2xl'>Note down the passKeys(Can be changed later using Master Key)</div>
         <div className='bg-slate-400 dark:bg-slate-500 w-40 h-20 mt-5 hover:cursor-pointer hover:opacity-90 flex justify-center items-center rounded-2xl' onClick={() => {window.location.href = "/"}}>OK</div>
