@@ -45,7 +45,8 @@ export default function SentFilesPage() {
             fileName : fileData.fileName,
             caption : fileData.caption,
             time: fileData.transactionTime!,
-            blocked: blocked
+            blocked: blocked,
+            version: fileData.version!
         }
         fileArray.push(tmp)
     }

@@ -50,9 +50,27 @@ export default function SendFilePage() {
   
     setLoading(true)
 
+    const checkFileExists = await supabase
+    .from("fileHistory")
+    .select()
+    .eq("master",sessionStorage.getItem("user")!)
+    .eq("sentBy",sessionStorage.getItem("normal-user-name")!)
+    .eq("sentTo",sessionStorage.getItem("set_user")!)
+    .eq("fileName",fileDetails!.name)
+    .order("version",{ascending:false})
+
+    let data;
+
+    if (checkFileExists.data![0]){
+      data = {caption:fileCaption,sentBy:sessionStorage.getItem("normal-user-name")!,sentTo:sessionStorage.getItem("set_user")!,master:sessionStorage.getItem("user")!,fileName:fileDetails!.name,version:(checkFileExists.data![0].version!+1)}
+    }
+    else {
+      data = {caption:fileCaption,sentBy:sessionStorage.getItem("normal-user-name")!,sentTo:sessionStorage.getItem("set_user")!,master:sessionStorage.getItem("user")!,fileName:fileDetails!.name}
+    }
+
     await supabase
     .from("fileHistory")
-    .insert([{caption:fileCaption,sentBy:sessionStorage.getItem("normal-user-name")!,sentTo:sessionStorage.getItem("set_user")!,master:sessionStorage.getItem("user")!,fileName:fileDetails!.name}])
+    .insert([data])
 
     const blockedUsersRef = await supabase
         .from("users")

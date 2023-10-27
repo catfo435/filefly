@@ -4,7 +4,6 @@ import { saveAs } from 'file-saver'
 import { getBlob, ref, updateMetadata } from 'firebase/storage'
 import React from 'react'
 
-// Will be changed when backend is implemented
 export type FilePaneProps = {
     user? : string,
     fileName: string,

@@ -4,7 +4,6 @@ import { saveAs } from 'file-saver'
 import { getBlob, ref } from 'firebase/storage'
 import React from 'react'
 
-// Will be changed when backend is implemented
 export type SentFilePaneProps = {
     sentBy : string,
     sentTo : string,
@@ -13,6 +12,7 @@ export type SentFilePaneProps = {
     downloadFilePath?: string,
     caption? : string | null
     blocked : boolean
+    version? : number
 }
 
 
@@ -34,7 +34,7 @@ export default function SentFilePane(props: SentFilePaneProps) {
                     <div className='w-20 h-20 md:w-28 md:h-28 bg-slate-400 dark:bg-slate-500 rounded-full flex justify-center items-center'>{props.fileName.match("[^.]+$")![0].toUpperCase()}</div>
                 </div>
                 <div className='w-1/3 h-full flex overflow-x-scroll items-center justify-center'>
-                {props.fileName}
+                {props.fileName} {props.version?`(v${props.version})`:""}
                 </div>
                 <div className='w-1/3 h-full flex overflow-x-scroll items-center justify-center'>
                 <div className='flex flex-col'>

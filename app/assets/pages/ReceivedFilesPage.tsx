@@ -63,7 +63,7 @@ export default function ReceivedFilesPage() {
         <div className='flex flex-col content py-4 px-4 w-full h-full items-center'>
           <div className='w-fit h-fit'>Files received from {setUser}</div>
           <div className='flex flex-col w-full h-[500px] items-center overflow-scroll bg-slate-300 dark:bg-slate-800 mt-5 mb-10 rounded-3xl'>
-            {(!FileArray || !FileArray[0])?<div className='flex w-full h-full justify-center items-center'>No Files To Download</div>:loading?<div className='flex w-full h-full justify-center items-center'>Loading...</div>:
+            {((!FileArray || !FileArray[0]) && !loading)?<div className='flex w-full h-full justify-center items-center'>No Files To Download</div>:loading?<div className='flex w-full h-full justify-center items-center'>Loading...</div>:
             FileArray?.map((fileProps,id) => {return <FilePane key={id} {...fileProps} /> })}
           </div>
         </div>

@@ -40,6 +40,7 @@ export interface Database {
           sentBy: string
           sentTo: string
           transactionTime: string | null
+          version: number | null
         }
         Insert: {
           caption?: string | null
@@ -49,6 +50,7 @@ export interface Database {
           sentBy: string
           sentTo: string
           transactionTime?: string | null
+          version?: number | null
         }
         Update: {
           caption?: string | null
@@ -58,6 +60,7 @@ export interface Database {
           sentBy?: string
           sentTo?: string
           transactionTime?: string | null
+          version?: number | null
         }
         Relationships: []
       }

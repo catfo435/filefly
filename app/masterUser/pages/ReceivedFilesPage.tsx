@@ -31,13 +31,21 @@ export default function ReceivedFilesPage() {
       if (getBlockedUsers.data![0].blockedUsers != null && getBlockedUsers.data![0].blockedUsers.users.includes(metaData.customMetadata!.sentBy)){
         continue;
       }
+      const getVersion = await supabase
+      .from("fileHistory")
+      .select()
+      .eq("sentTo",sessionStorage.getItem("user")!)
+      .eq("master",metaData.customMetadata!.sentBy)
+      .eq("fileName",res.items[i].name)
+      .order("version",{ascending:false})      
 
       let fileProps : FilePaneProps = {
         user : metaData.customMetadata!.sentBy,
         caption: metaData.customMetadata!.caption,
         time: metaData.customMetadata!.timeStamp,
         fileName : res.items[i].name,
-        downloadFilePath : res.items[i].fullPath
+        downloadFilePath : res.items[i].fullPath,
+        version : getVersion.data![0].version!
       }
       fileArray.push(fileProps)
     }
