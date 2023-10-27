@@ -10,7 +10,7 @@ Tasks to Implement:
 - [X] Database Config, Integration
 - [X] Master Key, Normal PassKey Implementation
 - [ ] Master Key Priveleges
-- [X] Error Handling + File Limit Check
+- [X] File Limit Check
 - [X] FireBase and Supabase Config, Integration
 - [X] File Upload/Download Menu
 
@@ -20,4 +20,5 @@ Tasks to Implement:
 
 
 - [ ] Responsive Design (progress : partial, not all parts of the website)
+- [ ] Error Handling (Across the website)
 
