@@ -1,7 +1,7 @@
 "use client"
 import { fileStorage } from '@/app/backend/fireBase'
 import { saveAs } from 'file-saver'
-import { getBlob, getDownloadURL, ref } from 'firebase/storage'
+import { getBlob, ref } from 'firebase/storage'
 import React from 'react'
 
 // Will be changed when backend is implemented
@@ -12,6 +12,7 @@ export type SentFilePaneProps = {
     time?: string,
     downloadFilePath?: string,
     caption? : string | null
+    blocked : boolean
 }
 
 
@@ -26,7 +27,7 @@ export default function SentFilePane(props: SentFilePaneProps) {
 
   return (
         <div className='w-[80%] h-[150px] grid grid-cols-5'>
-            <div title={props.time} className='mx-5 col-span-4 h-[130px] my-5 flex justify-center items-center bg-slate-350 dark:bg-slate-700 hover:opacity-90 hover:dark:bg-slate-650 hover:cursor-pointer rounded-lg'
+            <div title={props.time} className={`mx-5 col-span-4 h-[130px] my-5 flex justify-center items-center ${props.blocked?"bg-[#D7BCCC] dark:bg-[#9C475B]":"bg-slate-350 dark:bg-slate-700"} hover:opacity-90 hover:dark:bg-slate-650 hover:cursor-pointer rounded-lg`}
             onClick={handleClick}>
                 <div className='content flex w-[90%] h-[90%] items-center text-2xl md:text-3xl divide-x-4 divide-slate-400 dark:divide-slate-600'>
                     <div className='w-1/3 h-full flex items-center justify-center'>
@@ -43,7 +44,7 @@ export default function SentFilePane(props: SentFilePaneProps) {
                 </div>
                 </div>
             </div>
-            <div title={props.time} className='mx-5 col-span-1 h-[130px] my-5 flex justify-center items-center bg-slate-350 dark:bg-slate-700 hover:opacity-90 hover:dark:bg-slate-650 hover:cursor-pointer rounded-lg'>
+            <div title={props.time} className={`mx-5 col-span-1 h-[130px] my-5 flex justify-center items-center ${props.blocked?"bg-[#D7BCCC] dark:bg-[#9C475B]":"bg-slate-350 dark:bg-slate-700"} hover:opacity-90 hover:dark:bg-slate-650 hover:cursor-pointer rounded-lg`}>
                 <div className='h-full text-2xl flex overflow-x-scroll items-center justify-center'>
                 Caption: {props.caption?props.caption:"No caption"}
                 </div>

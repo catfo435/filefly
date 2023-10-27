@@ -21,15 +21,31 @@ export default function SentFilesPage() {
         return;
     }
 
+
     let fileArray = new Array<SentFilePaneProps>;
     for (var i=0;i<sentFilesRef.data.length;i++){
         const fileData = sentFilesRef.data[i]
+
+
+        let blocked = false;
+
+        const blockedUsersRef = await supabase
+        .from("users")
+        .select()
+        .eq("userName",sessionStorage.getItem("user")!)
+
+        if (blockedUsersRef.data![0].blockedUsers.users.includes(fileData.sentTo!)){
+          blocked = true
+        }
+
+
         let tmp = {
             sentBy : fileData.sentBy,
             sentTo : fileData.sentTo,
             fileName : fileData.fileName,
             caption : fileData.caption,
-            time: fileData.transactionTime!
+            time: fileData.transactionTime!,
+            blocked: blocked
         }
         fileArray.push(tmp)
     }

@@ -50,6 +50,21 @@ export default function SendFilePage() {
   
     setLoading(true)
 
+    await supabase
+    .from("fileHistory")
+    .insert([{caption:fileCaption,sentBy:sessionStorage.getItem("normal-user-name")!,sentTo:sessionStorage.getItem("set_user")!,master:sessionStorage.getItem("user")!,fileName:fileDetails!.name}])
+
+    const blockedUsersRef = await supabase
+        .from("users")
+        .select()
+        .eq("userName",sessionStorage.getItem("user")!)
+
+        if (blockedUsersRef.data![0].blockedUsers.users.includes(toUser!)){
+          setLoading(false)
+          alert("File Sent!")
+            return;
+        }
+
 
     const fileUploadRef = ref(fileStorage,`${sessionStorage.getItem("set_user")}/${fileDetails!.name}`)
 
@@ -64,10 +79,6 @@ export default function SendFilePage() {
     }
 
     uploadBytes(fileUploadRef, fileDetails!, newMetadata).then(async (snapshot) => {
-
-      await supabase
-      .from("fileHistory")
-      .insert([{caption:fileCaption,sentBy:sessionStorage.getItem("normal-user-name")!,sentTo:sessionStorage.getItem("set_user")!,master:sessionStorage.getItem("user")!,fileName:fileDetails!.name}])
       
     setLoading(false)
     alert("File sent!")
