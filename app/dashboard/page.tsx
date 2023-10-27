@@ -13,6 +13,10 @@ export default function Page() {
 
   function handleSubmit(e:FormEvent<HTMLFormElement>){
     e.preventDefault();
+    if (userNameReceipient == userName){
+      alert("Cant send files to yourself")
+      return;
+    }
     if (!userNameReceipient) {
       alert("Please enter a username");
       return;
