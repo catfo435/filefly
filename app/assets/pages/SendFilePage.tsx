@@ -8,8 +8,16 @@ import { supabase } from '@/app/backend/supabase';
 import PreviewPane from './PreviewPane';
 import { checkUser } from '@/app/backend/checkSession';
 
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
-export default function SendFilePage() {
+
+export const getServerSideProps = (async (context) => {
+  let toUser = sessionStorage.getItem("set_user")!
+  return {props: {toUser}}
+}) satisfies GetServerSideProps
+
+
+export default function SendFilePage({toUser} : InferGetServerSidePropsType<typeof getServerSideProps>) {
 
 
   async function handleFileSend(){
@@ -125,15 +133,9 @@ export default function SendFilePage() {
   const [uploadState,setUploadState] = useState(false)
   const [fileDetails, setFileDetails] = useState<File | null>()
   const [fileCaption, setFileCaption] = useState<string>("")
-  const [toUser, setToUser] = useState<string>()
 
   const [previewState,setPreviewState] = useState<"img" | "pdf" | null>()
   const [loading, setLoading] = useState(false)
-
-  
-  useEffect(() => {
-    setToUser(sessionStorage.getItem("set_user")!)
-  },[])
 
   return (
     <div className='sendFiles w-full flex flex-auto md:flex-none justify-center items-center'>

@@ -183,16 +183,16 @@ export default function LoginPage(props: LoginPaneProps){
               <label htmlFor="otpVerify">Enter OTP</label>
               <input id="otpVerify" type="text" value={OTPval} onChange={(e) => {setOTPval(e.target.value)}} required></input>
             </div>:
-            <div hidden={usePassKeys}>
+            !usePassKeys?<div>
               <label htmlFor="phoneNumber">Phone Number</label>
               <input id="phoneNumber" type="text" value={phoneNumber} onChange={(e) => {if (e.target.value.length <= 10) {setphoneNumber(e.target.value)}}} required></input>
-            </div>
+            </div>:""
             }
 
-            <span className="flex justify-center">{loading?(OTPState?"Logging In....":"Sending OTP..."):""}</span>
+            <span className="flex justify-center">{loading?(usePassKeys?"Logging In...":OTPState?"Logging In....":"Sending OTP..."):""}</span>
 
             <div className="flex justify-center items-center">
-            <button className="px-2 py-2 my-5 text-xl rounded-lg hover:outline-double bg-slate-400 dark:bg-slate-500" type="submit">{OTPState?"Log In":"Get OTP"}</button>
+            <button className="px-2 py-2 my-5 text-xl rounded-lg hover:outline-double bg-slate-400 dark:bg-slate-500" type="submit">{usePassKeys?"Log In":OTPState?"Log In":"Get OTP"}</button>
             </div>
           </form>
           </div>
