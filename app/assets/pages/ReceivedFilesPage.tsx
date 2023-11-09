@@ -33,7 +33,7 @@ export default function ReceivedFilesPage() {
       const getBlockedUsers = await supabase
       .from("users")
       .select()
-      .eq("userName",sessionStorage.getItem("user")!)
+      .eq("user_name",sessionStorage.getItem("user")!)
 
       if (getBlockedUsers.data![0].blockedUsers != null && getBlockedUsers.data![0].blockedUsers.users.includes(metaData.customMetadata!.sentBy)){
         continue;

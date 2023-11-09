@@ -1,6 +1,5 @@
 "use client"
 import {  FormEvent, useState } from "react";
-import { supabase } from "../../backend/supabase";
 
 type SignUpPageProps = {
   setPassKeys : Function
@@ -24,24 +23,22 @@ export default function SignUpPage(props: SignUpPageProps){
       }
 
       try {
+
+        
         
       const passKeys = {
         master : pass!,
         normalPasskeys:[
-          {id:1,passkey:randomPassword(),caption:"normal-user-1"},
-          {id:2,passkey:randomPassword(),caption:"normal-user-2"},
-          {id:3,passkey:randomPassword(),caption:"normal-user-3"},
-          {id:4,passkey:randomPassword(),caption:"normal-user-4"},
-          {id:5,passkey:randomPassword(),caption:"normal-user-5"},
-          {id:6,passkey:randomPassword(),caption:"normal-user-6"}
+          {id:1,passkey:(randomPassword()),caption:"normal-user-1"},
+          {id:2,passkey:(randomPassword()),caption:"normal-user-2"},
+          {id:3,passkey:(randomPassword()),caption:"normal-user-3"},
+          {id:4,passkey:(randomPassword()),caption:"normal-user-4"},
+          {id:5,passkey:(randomPassword()),caption:"normal-user-5"},
+          {id:6,passkey:(randomPassword()),caption:"normal-user-6"}
         ]
       }
 
-      await supabase
-      .from("users")
-      .insert([{userName:userName!,passkeys:passKeys}])
-
-      props.setPassKeys(passKeys)
+      props.setPassKeys({user_name:user_name,passkeys:passKeys})
       return;
     }  
       catch(e){
@@ -49,7 +46,7 @@ export default function SignUpPage(props: SignUpPageProps){
       }
     }
 
-    const[userName,setUserName] = useState<string>();
+    const[user_name,setUserName] = useState<string>();
     const [pass,setPass] = useState<string>()
     const [passRepeat,setPassRepeat] = useState<string>()
 
@@ -62,7 +59,7 @@ export default function SignUpPage(props: SignUpPageProps){
           <div className="flex justify-center items-center">
           <form onSubmit={handleSubmit}>
             <label htmlFor="login_user">Username</label>
-            <input id="login_user" type="text" value={userName} onChange={(e) => {setUserName(e.target.value)}} required/>
+            <input id="login_user" type="text" value={user_name} onChange={(e) => {setUserName(e.target.value)}} required/>
             <br></br>
 
             <div>

@@ -8,13 +8,13 @@ type PassKeyPaneProps = {
 }
 
 export default function PassKeyPane(props: PassKeyPaneProps) {
-  const [passKeyVal, setpassKeyVal] = useState<string>(props.passkey.passkey)
+  const [passKeyVal, setpassKeyVal] = useState<string>("")
   const [captionVal, setCaptionVal] = useState<string>(props.passkey.caption)
 
   const [editState, setEditState] = useState(false)
 
   return (<div className='bg-slate-350 dark:bg-slate-650 rounded-2xl px-5 py-5 flex flex-col justify-center items-center text-center'>
-            <input className={editState?'my-2 px-2 py-2 rounded-3xl text-center':'my-2 px-2 py-2 rounded-3xl bg-slate-350 dark:bg-slate-650 text-center'} value={passKeyVal} onChange={(e) => {setpassKeyVal(e.target.value)}} disabled={!editState}></input>
+            <input className={editState?'my-2 px-2 py-2 rounded-3xl text-center':'my-2 px-2 py-2 rounded-3xl bg-slate-350 dark:bg-slate-650 text-center'} placeholder='Set New Passkey' value={passKeyVal} onChange={(e) => {setpassKeyVal(e.target.value)}} disabled={!editState}></input>
             <input className={editState?'my-2 px-2 py-2 rounded-3xl text-center':'my-2 px-2 py-2 rounded-3xl bg-slate-350 dark:bg-slate-650 text-center'} value={captionVal} onChange={(e) => {setCaptionVal(e.target.value)}} disabled={!editState}></input>
           <div className='grid grid-cols-2 gap-4'>
             <div className='bg-slate-350 dark:bg-slate-700 hover:opacity-90 hover:dark:bg-slate-650 px-3 py-3 hover:cursor-pointer rounded-3xl flex justify-center items-center' onClick={() => {
@@ -28,7 +28,7 @@ export default function PassKeyPane(props: PassKeyPaneProps) {
             }}>{editState?"Save":"Edit"}</div>
             <div className='bg-slate-350 dark:bg-slate-700 hover:opacity-90 hover:dark:bg-slate-650 px-3 py-3 hover:cursor-pointer rounded-3xl flex justify-center items-center' onClick={
               () =>{
-                setpassKeyVal(props.passkey.passkey)
+                setpassKeyVal("")
                 setCaptionVal(props.passkey.caption)
                 setEditState(false)
               }

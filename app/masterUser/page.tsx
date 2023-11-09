@@ -7,12 +7,12 @@ export default function Page() {
     setUserName(sessionStorage.getItem("user")!)
   })
 
-  const [userName,setUserName] = useState<string>()
+  const [user_name,setUserName] = useState<string>()
 
   return (
     <div className='flex flex-col justify-center items-center w-full h-full'>
       <div className="flex-initial text-4xl md:text-5xl my-4 w-full h-fit flex justify-center">
-        <span>Welcome, {userName}!</span>
+        <span>Welcome, {user_name}!</span>
       </div>
         <div className='flex justify-center items-center bg-[#D6DEE8] dark:bg-[#162032] w-[90%] h-[90%] rounded-3xl'>
             <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 gap-2 px-5 py-5 text-3xl md:text-4xl'>

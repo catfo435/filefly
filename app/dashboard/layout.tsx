@@ -15,10 +15,10 @@ export default function DashLayout({
 
       const loggedIn = (sessionStorage.getItem("user") != null)
 
-      if (loggedIn){
-        checkUser()
-        document.addEventListener("click",checkUser)
-      }
+      // if (loggedIn){
+      //   checkUser()
+      //   document.addEventListener("click",checkUser)
+      // }
 
       let user;
       if (typeof window !== "undefined" && window.sessionStorage){

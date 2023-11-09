@@ -10,12 +10,12 @@ export default function Layout({
 
     useEffect(() => {
 
-      const loggedIn = (sessionStorage.getItem("user") != null)
+      // const loggedIn = (sessionStorage.getItem("user") != null)
 
-      if (loggedIn){
-        checkUser()
-        document.addEventListener("click",checkUser)
-      }
+      // if (loggedIn){
+      //   checkUser()
+      //   document.addEventListener("click",checkUser)
+      // }
 
       const masterUser = (sessionStorage.getItem("restrictedPrivy") == "disabled")
 

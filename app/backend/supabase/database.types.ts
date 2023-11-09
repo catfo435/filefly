@@ -92,21 +92,21 @@ export interface Database {
           dateCreated: string
           id: number
           passkeys: passKeyJson
-          userName: string
+          user_name: string
         }
         Insert: {
           blockedUsers?: blockedUsers
           dateCreated?: string
           id?: number
           passkeys: passKeyJson
-          userName: string
+          user_name: string
         }
         Update: {
           blockedUsers?: blockedUsers
           dateCreated?: string
           id?: number
           passkeys?: passKeyJson
-          userName?: string
+          user_name?: string
         }
         Relationships: []
       }

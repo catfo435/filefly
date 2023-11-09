@@ -32,7 +32,7 @@ export default function SentFilesPage() {
         const blockedUsersRef = await supabase
         .from("users")
         .select()
-        .eq("userName",sessionStorage.getItem("user")!)
+        .eq("user_name",sessionStorage.getItem("user")!)
 
         if (blockedUsersRef.data![0].blockedUsers.users.includes(fileData.sentTo!)){
           blocked = true

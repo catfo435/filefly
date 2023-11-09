@@ -74,7 +74,7 @@ export default function SendFilePage() {
     const blockedUsersRef = await supabase
         .from("users")
         .select()
-        .eq("userName",sessionStorage.getItem("user")!)
+        .eq("user_name",sessionStorage.getItem("user")!)
 
         if (blockedUsersRef.data![0].blockedUsers.users.includes(toUser!)){
           setLoading(false)

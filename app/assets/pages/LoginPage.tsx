@@ -5,6 +5,8 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react"
 
 import { supabase } from "../../backend/supabase";
 import { passKey } from "../../backend/supabase/database.types"
+import sign from "jwt-encode";
+import { sha256 } from "js-sha256";
 
 type LoginPaneProps = {
   setNewUserLogin: Dispatch<SetStateAction<boolean>>
@@ -12,29 +14,52 @@ type LoginPaneProps = {
 
 export default function LoginPage(props: LoginPaneProps){
 
-
-  function randomToken() {
-    return(
-      Math.random().toString(36).slice(2) +
-      Math.random().toString(36)
-      .toUpperCase().slice(2));
-    }
-
   async function onSuccessLogin(userType: "master" | passKey ){
-    const sessionToken = randomToken()
+    // var sessionToken = sign({
+    //   user_name:user_name,
+    //   exp: Math.floor(Date.now()/1000) + 3600, //session valid for an hour
+    //   iat: Math.floor(Date.now()/1000),
+    //   jti: Math.floor(Date.now()/1000).toString(),
+    //   role: "authenticated"
+    // },process.env.NEXT_PUBLIC_SUPABASE_SECRET!)
+    // sessionStorage.setItem("sessionSecret",sessionToken)
+
+    // const supabase = supabaseAfterLogin(sessionToken)
+
+    function generateToken() {
+      return(
+        Math.random().toString(36).slice(2) +
+        Math.random().toString(36)
+        .toUpperCase().slice(2));
+      }
+    const sessionToken = generateToken()
     sessionStorage.setItem("sessionSecret",sessionToken)
+
     if (userType == "master"){
 
-      await supabase
+      const res = await supabase
       .from("loginHistory")
-      .insert([{user:"master",master_user:userName, secret:sessionToken, loginDeviceDetails:navigator.userAgent}])
+      .insert([{user:"master",master_user:user_name, secret:sessionToken, loginDeviceDetails:navigator.userAgent}])
+
+      if (res.error) {
+        console.error(res.error)
+        return false
+      }
 
     }
     else {
-      await supabase
+      const res = await supabase
       .from("loginHistory")
-      .insert([{user:userType.caption,master_user:userName, secret:sessionToken, loginDeviceDetails:navigator.userAgent}])
+      .insert([{user:userType.caption,master_user:user_name, secret:sessionToken, loginDeviceDetails:navigator.userAgent}])
+
+      if (res.error) {
+        console.error(res.error)
+        return false
+      }
     }
+
+    return true
+    
   }
 
 
@@ -43,14 +68,14 @@ export default function LoginPage(props: LoginPaneProps){
     const checkPass = await supabase
       .from("users")
       .select()
-      .eq("userName",userName!)
+      .eq("user_name",user_name!)
 
     const passKeysRef = checkPass.data![0].passkeys.normalPasskeys
     let passCheck = false;
     let normalUser;
 
     for (var i=0;i<passKeysRef.length;i++){
-      if (passKeysRef[i].passkey == pass){
+      if (sha256(pass!) == passKeysRef[i].passkey){
         passCheck = true;
         normalUser = passKeysRef[i]
         break;
@@ -58,10 +83,14 @@ export default function LoginPage(props: LoginPaneProps){
     }
 
     if(passCheck){
+      if (!await onSuccessLogin(normalUser!)){
+        alert("Something went wrong")
+        setLoading(false)
+        return;
+      }
       sessionStorage.setItem("restrictedPrivy","enabled")
       sessionStorage.setItem("normal-user-name",normalUser!.caption)
-      sessionStorage.setItem("user",userName!);
-      await onSuccessLogin(normalUser!)
+      sessionStorage.setItem("user",user_name!);
       router.push("/dashboard") 
     }
     else {
@@ -80,10 +109,10 @@ export default function LoginPage(props: LoginPaneProps){
     const checkUser = await supabase
       .from("users")
       .select()
-      .eq("userName",userName!)
+      .eq("user_name",user_name!)
     
     if (!checkUser.data![0]){
-      alert("No such username");
+      alert("No such user_name");
       setUserName("")
       setPass("")
       setLoading(false)
@@ -99,15 +128,23 @@ export default function LoginPage(props: LoginPaneProps){
       const checkPass = await supabase
       .from("users")
       .select()
-      .eq("userName",userName!)
+      .eq("user_name",user_name!)
 
 
-      if (checkPass.data![0].passkeys.master == pass) {
-        sessionStorage.setItem("user",userName!);
+      if (sha256(pass!) == checkPass.data![0].passkeys.master) {
+        if (!await onSuccessLogin("master")) {
+          alert("Something went wrong!")
+          setLoading(false)
+          return;
+        } 
+        sessionStorage.setItem("user",user_name!);
         sessionStorage.setItem("restrictedPrivy","disabled")
-        onSuccessLogin("master")
       }
       else {
+        console.log(sha256(pass!));
+        console.log(checkPass.data![0].passkeys.master);
+        
+        
         alert("Wrong pass");
         setLoading(false);
         return
@@ -118,7 +155,7 @@ export default function LoginPage(props: LoginPaneProps){
 
     const router = useRouter()
 
-    const[userName,setUserName] = useState<string>();
+    const[user_name,setUserName] = useState<string>();
     const[usePassKeys,setUsePassKeys] = useState(true);
     const [pass,setPass] = useState<string>()
     const [loading,setLoading] = useState(false)
@@ -130,7 +167,7 @@ export default function LoginPage(props: LoginPaneProps){
           <div className="flex justify-center items-center">
           <form onSubmit={handleLogin}>
             <label htmlFor="login_user">Username</label>
-            <input id="login_user" type="text" value={userName} onChange={(e) => {setUserName(e.target.value)}} required/>
+            <input id="login_user" type="text" value={user_name} onChange={(e) => {setUserName(e.target.value)}} required/>
             <br></br>
             <label htmlFor="login_pass">{usePassKeys?"PassKey":"Password"}</label>
             <input id="login_pass" type="password" value={pass} onChange={(e) => {setPass(e.target.value)}} required/>

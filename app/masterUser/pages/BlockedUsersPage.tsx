@@ -16,7 +16,7 @@ export default function BlockedUsersPage() {
         await supabase
         .from("users")
         .update({blockedUsers:{users:temp}})
-        .eq("userName",sessionStorage.getItem("user")!)
+        .eq("user_name",sessionStorage.getItem("user")!)
 
         setLoading(false)
         setblockedUsers(temp)
@@ -50,7 +50,7 @@ export default function BlockedUsersPage() {
         await supabase
         .from("users")
         .update({blockedUsers:{users:temp}})
-        .eq("userName",sessionStorage.getItem("user")!)
+        .eq("user_name",sessionStorage.getItem("user")!)
 
         setLoading(false)
         setblockedUsers(temp)
@@ -69,7 +69,7 @@ export default function BlockedUsersPage() {
         const blockedUsersRef = await supabase
         .from("users")
         .select()
-        .eq("userName",sessionStorage.getItem("user")!)
+        .eq("user_name",sessionStorage.getItem("user")!)
 
         if (blockedUsersRef.data![0].blockedUsers == null){
             setblockedUsers([])
