@@ -34,7 +34,8 @@ export default function SentFilesPage() {
         .select()
         .eq("user_name",sessionStorage.getItem("user")!)
 
-        if (blockedUsersRef.data![0].blockedUsers.users.includes(fileData.sentTo!)){
+
+        if (blockedUsersRef.data![0].blockedUsers != null && blockedUsersRef.data![0].blockedUsers.users.includes(fileData.sentTo!)){
           blocked = true
         }
 

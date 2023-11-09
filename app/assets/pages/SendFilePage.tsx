@@ -76,7 +76,7 @@ export default function SendFilePage() {
         .select()
         .eq("user_name",sessionStorage.getItem("user")!)
 
-        if (blockedUsersRef.data![0].blockedUsers.users != null && blockedUsersRef.data![0].blockedUsers.users.includes(toUser!)){
+        if (blockedUsersRef.data![0].blockedUsers != null && blockedUsersRef.data![0].blockedUsers.users.includes(toUser!)){
           setLoading(false)
           alert("File Sent!")
             return;
